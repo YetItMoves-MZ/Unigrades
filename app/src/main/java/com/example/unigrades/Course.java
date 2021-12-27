@@ -1,5 +1,7 @@
 package com.example.unigrades;
 
+import android.os.Bundle;
+
 public class Course {
     String name;
     int maxNumOfStudents = 0;
@@ -7,6 +9,16 @@ public class Course {
     Teacher teacher;
 
     public Course() {
+    }
+
+
+    public void setCourseFromBundle(Bundle bundle){
+        //TODO
+
+    }
+    public void setBundleFromCourse(Bundle bundle){
+        //TODO
+
     }
 
 

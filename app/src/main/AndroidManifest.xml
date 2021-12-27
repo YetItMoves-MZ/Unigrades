@@ -10,7 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unigrades">
         <activity
-            android:name=".MainActivity"
+            android:name=".SearchResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".CourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyCoursesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
