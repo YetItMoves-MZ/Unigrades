@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1094855400902",
+    "project_id": "udes-78f31",
+    "storage_bucket": "udes-78f31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094855400902:android:959b517879ba7e755526c7",
+        "android_client_info": {
+          "package_name": "com.example.unigrades"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094855400902-sic47ksplnua10e3q62hqurphrajpv88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQaQqC4uD4MvHc6qsIIKM7zMwOWOdmNy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094855400902-sic47ksplnua10e3q62hqurphrajpv88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
