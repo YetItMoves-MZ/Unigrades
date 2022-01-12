@@ -19,14 +19,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/signIn_BUTTON_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
-        android:text="Button"
+        android:text="Sign In"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_password" />
 
     <Button
         android:id="@+id/signIn_BUTTON_toSignUp"
@@ -36,10 +36,10 @@
         android:layout_marginEnd="64dp"
         android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_password" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/signIn_EDITTEXT_emailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signIn_TEXT_title" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/signIn_EDITTEXT_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -58,6 +58,6 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_emailAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
