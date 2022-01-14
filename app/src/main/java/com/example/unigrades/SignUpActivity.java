@@ -69,12 +69,12 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("fireBase", "createUserWithEmail:success");
+                            Log.d("fbtag", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("fireBase", "createUserWithEmail:failure", task.getException());
+                            Log.w("fbtag", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignUpActivity.this,
                                     task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
@@ -88,7 +88,12 @@ public class SignUpActivity extends AppCompatActivity {
         if (user!=null){
             Toast.makeText(SignUpActivity.this, "Account Created!",
                     Toast.LENGTH_SHORT).show();
-            String uid = user.getUid(); // TODO create firebase database
+            String uid = user.getUid();
+            //TODO add type to sign up
+            Account acc = new Account().setType(Account.student);
+            acc.addAccountToDB(uid);
+            //TODO update ui;
+
 
         }
 

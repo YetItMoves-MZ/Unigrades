@@ -12,10 +12,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -28,6 +36,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private String email="";
     private String password="";
+
 
 
     @Override
@@ -65,13 +74,13 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("fireBase", "signInWithEmail:success");
+                            Log.d("fbtag", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
 
                             // If sign in fails, display a message to the user.
-                            Log.w("fireBase", "signInWithEmail:failure",
+                            Log.w("fbtag", "signInWithEmail:failure",
                                     task.getException());
                             Toast.makeText(SignInActivity.this,
                                     task.getException().getMessage(),
@@ -97,9 +106,20 @@ public class SignInActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user!=null){
-            Toast.makeText(SignInActivity.this, "Account Found!",
-                    Toast.LENGTH_SHORT).show();
-            String uid = user.getUid(); // TODO create firebase database
+            String uid = user.getUid();
+            Account acc = new Account();
+            Account.Callback_Account callback_account = new Account.Callback_Account() {
+                @Override
+                public void dataReady(Account value) {
+                    acc.setAccountByAccount(value);
+                    Toast.makeText(SignInActivity.this,
+                            "Account Found!, type: " + acc.getType(),
+                            Toast.LENGTH_SHORT).show();
+                    //TODO update UI
+                }
+            };
+            acc.findAccount(uid, callback_account);
+
 
         }
 

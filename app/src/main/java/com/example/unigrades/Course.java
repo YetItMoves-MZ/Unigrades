@@ -11,6 +11,41 @@ public class Course {
     public Course() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Course setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public int getMaxNumOfStudents() {
+        return maxNumOfStudents;
+    }
+
+    public Course setMaxNumOfStudents(int maxNumOfStudents) {
+        this.maxNumOfStudents = maxNumOfStudents;
+        return this;
+    }
+
+    public Student[] getStudents() {
+        return students;
+    }
+
+    public Course setStudents(Student[] students) {
+        this.students = students;
+        return this;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public Course setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+        return this;
+    }
 
     public void setCourseFromBundle(Bundle bundle){
         //TODO
