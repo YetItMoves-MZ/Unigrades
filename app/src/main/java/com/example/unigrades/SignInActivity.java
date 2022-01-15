@@ -51,7 +51,6 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startSignUpActivity();
-                finish();
             }
         });
 
@@ -94,6 +93,7 @@ public class SignInActivity extends AppCompatActivity {
     private void startSignUpActivity() {
         Intent myIntent = new Intent(this, SignUpActivity.class);
         startActivity(myIntent);
+        finish();
     }
 
     private void findViews() {
@@ -115,14 +115,24 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(SignInActivity.this,
                             "Account Found!, type: " + acc.getType(),
                             Toast.LENGTH_SHORT).show();
+
+
                     //TODO update UI
+                    startMyAcccountInfoActivity();
                 }
             };
             acc.findAccount(uid, callback_account);
 
 
+
         }
 
+    }
+
+    private void startMyAcccountInfoActivity() {
+        Intent myIntent = new Intent(this, MyAccountInfoActivity.class);
+        startActivity(myIntent);
+        finish();
     }
 
 }
