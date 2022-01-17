@@ -1,6 +1,7 @@
 package com.example.unigrades;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,12 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Toolbar{
-    private Context context;
+    private AppCompatActivity appCompatActivity;
     private ImageView menu;
 
     public Toolbar(){}
-    public Toolbar(Context context) {
-        this.context = context;
+    public Toolbar(AppCompatActivity appCompatActivity) {
+        this.appCompatActivity = appCompatActivity;
         findViews();
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +29,7 @@ public class Toolbar{
     }
 
     private void showToolbarMenu(View v) {
-        PopupMenu popup = new PopupMenu(context, v);
+        PopupMenu popup = new PopupMenu(appCompatActivity, v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, popup.getMenu());
         popup.show();
@@ -37,21 +38,21 @@ public class Toolbar{
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.item1:
-                        Toast.makeText(context,
-                                "item 1 clicked",
-                                Toast.LENGTH_LONG).show();
+                        MyGlobalFunctions.startNewActivity(appCompatActivity,
+                                MyCoursesActivity.class);
 
+                        // TODO delete this comment later
+                        // this is how you check the same activity
+                        // if (appCompatActivity.getClass() == MyAccountInfoActivity.class)
                         return true;
                     default:
                         return false;
-
                 }
             }
         });
     }
 
     private void findViews() {
-        AppCompatActivity appCompatActivity = (AppCompatActivity) context;
         menu = appCompatActivity.findViewById(R.id.toolbar_IMG_menu);
     }
 }

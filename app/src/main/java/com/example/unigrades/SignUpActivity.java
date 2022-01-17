@@ -44,8 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         toSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSignInActivity();
-                finish();
+                outOfListener(SignInActivity.class);
             }
         });
 
@@ -99,28 +98,19 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private void startSignInActivity() {
-        Intent myIntent = new Intent(this, SignInActivity.class);
-        startActivity(myIntent);
+    /**
+     * This function is used just to get out of listener to get the current activity
+     * @param classType the class of the activity we want to start.
+     */
+    private void outOfListener(Class classType) {
+        MyGlobalFunctions.startNewActivity(this, classType);
     }
+
 
     private void findViews() {
         toSignIn = findViewById(R.id.signUp_BUTTON_toSignIn);
         signUp = findViewById(R.id.signUp_BUTTON_signUp);
         editTextEmail = findViewById(R.id.signUp_EDITTEXT_emailAddress);
         editTextPassword = findViewById(R.id.signUp_EDITTEXT_password);
-
     }
-
-    /*
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            currentUser.reload();
-        }
-    }
-    */
 }

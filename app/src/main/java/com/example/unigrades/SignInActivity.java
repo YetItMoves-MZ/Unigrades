@@ -3,7 +3,6 @@ package com.example.unigrades;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,18 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import com.google.firebase.firestore.FirebaseFirestore;
-
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -38,6 +29,17 @@ public class SignInActivity extends AppCompatActivity {
     private String password="";
 
 
+    //TODO need to test that.
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            currentUser.reload();
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class SignInActivity extends AppCompatActivity {
         toSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSignUpActivity();
+                outOfListener(SignUpActivity.class);
             }
         });
 
@@ -64,37 +66,42 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This function sign the user in with the given email and password.
+     */
     private void signIn() {
         email = editTextEmail.getText().toString();
         password = editTextPassword.getText().toString();
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("fbtag", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
+        try {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("fbtag", "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
 
-                            // If sign in fails, display a message to the user.
-                            Log.w("fbtag", "signInWithEmail:failure",
-                                    task.getException());
-                            Toast.makeText(SignInActivity.this,
-                                    task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                            updateUI(null);
+                                // If sign in fails, display a message to the user.
+                                Log.w("fbtag", "signInWithEmail:failure",
+                                        task.getException());
+                                Toast.makeText(SignInActivity.this,
+                                        task.getException().getMessage(),
+                                        Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+        } catch (Exception e) {
+            Log.w("fbtag", "signInWithEmail:failure",
+                    e);
+            Toast.makeText(SignInActivity.this,
+                    e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
-    private void startSignUpActivity() {
-        Intent myIntent = new Intent(this, SignUpActivity.class);
-        startActivity(myIntent);
-        finish();
-    }
 
     private void findViews() {
         toSignUp = findViewById(R.id.signIn_BUTTON_toSignUp);
@@ -104,6 +111,10 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This function updates the activity after getting the user
+     * @param user the firebase user
+     */
     private void updateUI(FirebaseUser user) {
         if (user!=null){
             String uid = user.getUid();
@@ -112,27 +123,25 @@ public class SignInActivity extends AppCompatActivity {
                 @Override
                 public void dataReady(Account value) {
                     acc.setAccountByAccount(value);
+                    // TODO change toast later
                     Toast.makeText(SignInActivity.this,
                             "Account Found!, type: " + acc.getType(),
                             Toast.LENGTH_SHORT).show();
 
-
-                    //TODO update UI
-                    startMyAcccountInfoActivity();
+                    outOfListener(MyAccountInfoActivity.class);
                 }
             };
             acc.findAccount(uid, callback_account);
-
-
-
         }
-
     }
 
-    private void startMyAcccountInfoActivity() {
-        Intent myIntent = new Intent(this, MyAccountInfoActivity.class);
-        startActivity(myIntent);
-        finish();
+    /**
+     * This function is used just to get out of listener to get the current activity
+     * @param classType the class of the activity we want to start.
+     */
+    private void outOfListener(Class classType) {
+        MyGlobalFunctions.startNewActivity(this, classType);
     }
+
 
 }
