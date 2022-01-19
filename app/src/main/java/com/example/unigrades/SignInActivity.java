@@ -119,21 +119,6 @@ public class SignInActivity extends AppCompatActivity {
         if (user!=null){
             String uid = user.getUid();
             MyGlobalFunctions.startNewActivity(this, MyAccountInfoActivity.class,uid);
-
-            //Account acc = new Account();
-            //Account.Callback_Account callback_account = new Account.Callback_Account() {
-            //    @Override
-            //    public void dataReady(Account value) {
-            //        acc.setAccountByAccount(value);
-            //        // TODO change toast later
-            //        Toast.makeText(SignInActivity.this,
-            //                "Account Found!, type: " + acc.getType(),
-            //                Toast.LENGTH_SHORT).show();
-//
-            //        outOfListener(MyAccountInfoActivity.class);
-            //    }
-            //};
-            //acc.findAccount(uid, callback_account);
         }
     }
 

@@ -26,17 +26,8 @@ public class Account {
 
     private String type;
     private ArrayList<Course> courses;
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public Account setFullName(String fullName) {
-        this.fullName = fullName;
-        return this;
-    }
-
     private String fullName;
+
 
     public Account(){}
 
@@ -54,13 +45,20 @@ public class Account {
         this.courses = courses;
         return this;
     }
+    public String getFullName() {
+        return fullName;
+    }
+    public Account setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
 
     public void addAccountToDB(String uid){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> acc = new HashMap<>();
         acc.put("type", this.type);
         acc.put("courses", this.courses);
-        acc.put("full name", this.fullName);
+        acc.put("fullName", this.fullName);
         DocumentReference myRef = db.collection("users").document(uid);
         myRef.set(acc);
     }
@@ -77,15 +75,14 @@ public class Account {
                         callback_account.dataReady(acc);
                     }
                 }
-
             }
-
         });
     }
 
     public void setAccountByAccount(Account other) {
-        type = other.type;
-        courses = other.courses;
+        type = other.getType();
+        courses = other.getCourses();
+        fullName = other.getFullName();
     }
 
 
