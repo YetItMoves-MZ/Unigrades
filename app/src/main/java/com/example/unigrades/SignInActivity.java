@@ -118,20 +118,22 @@ public class SignInActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if (user!=null){
             String uid = user.getUid();
-            Account acc = new Account();
-            Account.Callback_Account callback_account = new Account.Callback_Account() {
-                @Override
-                public void dataReady(Account value) {
-                    acc.setAccountByAccount(value);
-                    // TODO change toast later
-                    Toast.makeText(SignInActivity.this,
-                            "Account Found!, type: " + acc.getType(),
-                            Toast.LENGTH_SHORT).show();
+            MyGlobalFunctions.startNewActivity(this, MyAccountInfoActivity.class,uid);
 
-                    outOfListener(MyAccountInfoActivity.class);
-                }
-            };
-            acc.findAccount(uid, callback_account);
+            //Account acc = new Account();
+            //Account.Callback_Account callback_account = new Account.Callback_Account() {
+            //    @Override
+            //    public void dataReady(Account value) {
+            //        acc.setAccountByAccount(value);
+            //        // TODO change toast later
+            //        Toast.makeText(SignInActivity.this,
+            //                "Account Found!, type: " + acc.getType(),
+            //                Toast.LENGTH_SHORT).show();
+//
+            //        outOfListener(MyAccountInfoActivity.class);
+            //    }
+            //};
+            //acc.findAccount(uid, callback_account);
         }
     }
 
@@ -140,7 +142,7 @@ public class SignInActivity extends AppCompatActivity {
      * @param classType the class of the activity we want to start.
      */
     private void outOfListener(Class classType) {
-        MyGlobalFunctions.startNewActivity(this, classType);
+        MyGlobalFunctions.startNewActivity(this, classType, "");
     }
 
 

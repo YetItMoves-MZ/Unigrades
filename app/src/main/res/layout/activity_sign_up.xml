@@ -14,7 +14,7 @@
         android:layout_marginTop="32dp"
         android:text="Sign Up"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_password" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_SPINNER_teacherOrStudent" />
 
     <Button
         android:id="@+id/signUp_BUTTON_toSignIn"
@@ -24,7 +24,7 @@
         android:layout_marginEnd="64dp"
         android:text="Back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_password" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_SPINNER_teacherOrStudent" />
 
     <EditText
         android:id="@+id/signUp_EDITTEXT_password"
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -60,4 +62,37 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/signUp_SPINNER_teacherOrStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/signUp_TEXT_spinnerInfo"
+        app:layout_constraintStart_toStartOf="@+id/signUp_TEXT_spinnerInfo"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_TEXT_spinnerInfo" />
+
+    <TextView
+        android:id="@+id/signUp_TEXT_spinnerInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="teacher / student"
+        app:layout_constraintEnd_toEndOf="@+id/signUp_EDITTEXT_name"
+        app:layout_constraintStart_toStartOf="@+id/signUp_EDITTEXT_name"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_name" />
+
+    <EditText
+        android:id="@+id/signUp_EDITTEXT_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Full Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/signUp_EDITTEXT_password"
+        app:layout_constraintStart_toStartOf="@+id/signUp_EDITTEXT_password"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_password" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

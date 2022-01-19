@@ -5,8 +5,8 @@ import android.os.Bundle;
 public class Course {
     String name;
     int maxNumOfStudents = 0;
-    Student students[];
-    Teacher teacher;
+    Account students[];
+    Account teacher;
 
     public Course() {
     }
@@ -29,20 +29,20 @@ public class Course {
         return this;
     }
 
-    public Student[] getStudents() {
+    public Account[] getStudents() {
         return students;
     }
 
-    public Course setStudents(Student[] students) {
+    public Course setStudents(Account[] students) {
         this.students = students;
         return this;
     }
 
-    public Teacher getTeacher() {
+    public Account getTeacher() {
         return teacher;
     }
 
-    public Course setTeacher(Teacher teacher) {
+    public Course setTeacher(Account teacher) {
         this.teacher = teacher;
         return this;
     }

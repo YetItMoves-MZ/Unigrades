@@ -15,6 +15,8 @@ import java.util.Map;
 
 public class Account {
 
+
+
     public interface Callback_Account{
         void dataReady(Account value);
     }
@@ -24,6 +26,18 @@ public class Account {
 
     private String type;
     private ArrayList<Course> courses;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Account setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+
+    private String fullName;
+
     public Account(){}
 
     public String getType() {
@@ -46,6 +60,7 @@ public class Account {
         Map<String, Object> acc = new HashMap<>();
         acc.put("type", this.type);
         acc.put("courses", this.courses);
+        acc.put("full name", this.fullName);
         DocumentReference myRef = db.collection("users").document(uid);
         myRef.set(acc);
     }

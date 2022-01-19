@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class Toolbar{
     private AppCompatActivity appCompatActivity;
@@ -26,6 +28,7 @@ public class Toolbar{
                 showToolbarMenu(view);
             }
         });
+        String uid = FirebaseAuth.getInstance().getUid();
     }
 
     private void showToolbarMenu(View v) {
@@ -39,7 +42,7 @@ public class Toolbar{
                 switch (menuItem.getItemId()){
                     case R.id.item1:
                         MyGlobalFunctions.startNewActivity(appCompatActivity,
-                                MyCoursesActivity.class);
+                                MyCoursesActivity.class,"");
 
                         // TODO delete this comment later
                         // this is how you check the same activity

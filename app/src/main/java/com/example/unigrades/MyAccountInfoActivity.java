@@ -23,7 +23,14 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account_info);
+
+        //TODO repeat those 2 always from now on.
+        String uid = MyGlobalFunctions.getUidFromBundle(getIntent().getExtras().
+                getBundle(MyGlobalFunctions.BUNDLE));
         Toolbar toolbar = new Toolbar(this);
+
+        // show info based on uid:
+
 
 
 
