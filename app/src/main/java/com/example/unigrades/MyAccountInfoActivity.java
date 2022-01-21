@@ -36,8 +36,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account_info);
         //TODO repeat those 2 always from now on.
-        String uid = MyGlobalFunctions.getUidFromBundle(getIntent().getExtras().
-                getBundle(MyGlobalFunctions.BUNDLE));
+R        String uid = FirebaseAuth.getInstance().getUid();
         Toolbar toolbar = new Toolbar(this);
 
         findViews();
@@ -50,6 +49,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
             public void dataReady(Account value) {
                 myAccount.setAccountByAccount(value);
                 textName.setText("Welcome, " + myAccount.getFullName());
+                toolbar.setCurrentMode(myAccount.getType());
             }
         };
         myAccount.findAccount(uid, callback_account);

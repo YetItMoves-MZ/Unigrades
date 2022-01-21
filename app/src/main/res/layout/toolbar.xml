@@ -37,8 +37,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_baseline_menu_24"
-            android:onClick="showPopUp">
+            android:onClick="showPopUp"
+            android:src="@drawable/ic_baseline_menu_24">
 
 
         </ImageView>

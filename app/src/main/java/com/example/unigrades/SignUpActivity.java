@@ -151,7 +151,7 @@ public class SignUpActivity extends AppCompatActivity {
             String uid = user.getUid();
             Account acc = new Account().setType(typeTeacherOrStudent).setFullName(fullName);
             acc.addAccountToDB(uid);
-            MyGlobalFunctions.startNewActivity(this, MyAccountInfoActivity.class,uid);
+            MyGlobalFunctions.startNewActivity(this, MyAccountInfoActivity.class);
         }
 
     }
@@ -161,7 +161,7 @@ public class SignUpActivity extends AppCompatActivity {
      * @param classType the class of the activity we want to start.
      */
     private void outOfListener(Class classType) {
-        MyGlobalFunctions.startNewActivity(this, classType,"");
+        MyGlobalFunctions.startNewActivity(this, classType);
     }
 
 

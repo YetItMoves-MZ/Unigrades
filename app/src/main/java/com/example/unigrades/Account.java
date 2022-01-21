@@ -79,6 +79,7 @@ public class Account {
         });
     }
 
+
     public void setAccountByAccount(Account other) {
         type = other.getType();
         courses = other.getCourses();

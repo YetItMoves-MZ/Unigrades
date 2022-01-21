@@ -118,7 +118,7 @@ public class SignInActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if (user!=null){
             String uid = user.getUid();
-            MyGlobalFunctions.startNewActivity(this, MyAccountInfoActivity.class,uid);
+            MyGlobalFunctions.startNewActivity(this, MyAccountInfoActivity.class);
         }
     }
 
@@ -127,7 +127,7 @@ public class SignInActivity extends AppCompatActivity {
      * @param classType the class of the activity we want to start.
      */
     private void outOfListener(Class classType) {
-        MyGlobalFunctions.startNewActivity(this, classType, "");
+        MyGlobalFunctions.startNewActivity(this, classType);
     }
 
 

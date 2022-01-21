@@ -12,8 +12,6 @@ import java.lang.reflect.Type;
  */
 public class MyGlobalFunctions {
 
-    public static final String UID_BUNDLE = "UID";
-    public static final String BUNDLE = "BUNDLE";
 
     /**
      * This function starts new activity and closing current activity.
@@ -21,24 +19,10 @@ public class MyGlobalFunctions {
      * @param classType the class of the activity we want to start.
      */
     public static void startNewActivity(AppCompatActivity currentActivity,
-                                        Class classType,
-                                        String uid) {
+                                        Class classType) {
         Intent myIntent = new Intent(currentActivity, classType);
-        if(uid != "" && uid != null)
-            myIntent.putExtra(BUNDLE, setBundle(uid));
         currentActivity.startActivity(myIntent);
         currentActivity.finish();
-    }
-
-    private static Bundle setBundle(String uid){
-        Bundle b = new Bundle();
-        b.putString(UID_BUNDLE, uid);
-        return b;
-    }
-
-
-    public static String getUidFromBundle(Bundle b){
-        return b.getString(UID_BUNDLE);
     }
 
 
