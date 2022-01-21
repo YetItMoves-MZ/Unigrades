@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".CourseActivity">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        tools:layout_editor_absoluteX="-133dp"
+        tools:layout_editor_absoluteY="110dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,8 +35,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account_info);
-        //TODO repeat those 2 always from now on.
-R        String uid = FirebaseAuth.getInstance().getUid();
+        String uid = FirebaseAuth.getInstance().getUid();
         Toolbar toolbar = new Toolbar(this);
 
         findViews();
