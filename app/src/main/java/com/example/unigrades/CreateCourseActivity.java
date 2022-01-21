@@ -27,6 +27,7 @@ public class CreateCourseActivity extends AppCompatActivity {
                 toolbar.setCurrentMode(myAccount.getType());
             }
         };
+        myAccount.findAccount(uid, callback_account);
     }
 
     private void findViews() {
