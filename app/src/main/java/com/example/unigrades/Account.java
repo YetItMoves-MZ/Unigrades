@@ -25,7 +25,7 @@ public class Account {
     public static final String teacher="Teacher";
 
     private String type;
-    private ArrayList<Course> courses;
+    private ArrayList<AccountCourse> courses;
     private String fullName;
 
 
@@ -38,10 +38,10 @@ public class Account {
         this.type = type;
         return this;
     }
-    public ArrayList<Course> getCourses() {
+    public ArrayList<AccountCourse> getCourses() {
         return courses;
     }
-    public Account setCourses(ArrayList<Course> courses) {
+    public Account setCourses(ArrayList<AccountCourse> courses) {
         this.courses = courses;
         return this;
     }

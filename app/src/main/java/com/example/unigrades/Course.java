@@ -2,59 +2,27 @@ package com.example.unigrades;
 
 import android.os.Bundle;
 
-public class Course {
-    String name;
-    int maxNumOfStudents = 0;
-    Account students[];
-    Account teacher;
+import java.util.ArrayList;
+
+public class Course extends AccountCourse{
+    private ArrayList<String> studentComments;
+    private ArrayList<Student> students;
 
     public Course() {
     }
 
-    public String getName() {
-        return name;
+    public ArrayList<String> getStudentComments() {
+        return studentComments;
     }
-
-    public Course setName(String name) {
-        this.name = name;
+    public Course setStudentComments(ArrayList<String> studentComments) {
+        this.studentComments = studentComments;
         return this;
     }
-
-    public int getMaxNumOfStudents() {
-        return maxNumOfStudents;
-    }
-
-    public Course setMaxNumOfStudents(int maxNumOfStudents) {
-        this.maxNumOfStudents = maxNumOfStudents;
-        return this;
-    }
-
-    public Account[] getStudents() {
+    public ArrayList<Student> getStudents() {
         return students;
     }
-
-    public Course setStudents(Account[] students) {
+    public Course setStudents(ArrayList<Student> students) {
         this.students = students;
         return this;
     }
-
-    public Account getTeacher() {
-        return teacher;
-    }
-
-    public Course setTeacher(Account teacher) {
-        this.teacher = teacher;
-        return this;
-    }
-
-    public void setCourseFromBundle(Bundle bundle){
-        //TODO
-
-    }
-    public void setBundleFromCourse(Bundle bundle){
-        //TODO
-
-    }
-
-
 }
