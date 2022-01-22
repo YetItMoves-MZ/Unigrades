@@ -17,6 +17,7 @@ public class Account {
 
 
 
+
     public interface Callback_Account{
         void dataReady(Account value);
     }
@@ -79,13 +80,23 @@ public class Account {
         });
     }
 
-
     public void setAccountByAccount(Account other) {
         type = other.getType();
-        courses = other.getCourses();
         fullName = other.getFullName();
+
+        courses = other.getCourses();
+        if(courses == null){//no courses are up yet:
+            courses = new ArrayList<>();
+        }
     }
 
+    public boolean hasCourse(String cid) {
+        for(AccountCourse course: courses){
+            if(course.getCid().equals(cid))
+                return true;
+        }
+        return false;
+    }
 
 
 }

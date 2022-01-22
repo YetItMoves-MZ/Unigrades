@@ -9,7 +9,30 @@
     <include
         android:id="@+id/include"
         layout="@layout/toolbar"
-        tools:layout_editor_absoluteX="-133dp"
-        tools:layout_editor_absoluteY="110dp" />
+        tools:layout_editor_absoluteX="-65dp"
+        tools:layout_editor_absoluteY="-41dp" />
+
+    <Button
+        android:id="@+id/createCourse_BUTTON_createCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Create"
+        app:layout_constraintEnd_toEndOf="@+id/createCourse_EDITTEXT_courseName"
+        app:layout_constraintStart_toStartOf="@+id/createCourse_EDITTEXT_courseName"
+        app:layout_constraintTop_toBottomOf="@+id/createCourse_EDITTEXT_courseName"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/createCourse_EDITTEXT_courseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="Course Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
