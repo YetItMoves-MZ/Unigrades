@@ -22,13 +22,13 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-        course activity
-        sign in to course as a student
-        my courses activity
-        change the back button in the toolbar to go to the right location and not exit app
-        add comments as a student
-        add grades as a teacher
-        make everything prettier
+        course fragments - 24.1
+        sign in to course as a student (button in list_course) - 24.1
+        my courses activity - 24.1
+        change the back button in the toolbar to go to the right location and not exit app - 25.1
+        add comments as a student - 25.1
+        add grades as a teacher - 25.1
+        make everything prettier - 26.1
         optional: add more statistics (like total average for student and number of academic credits)
     */
     @Override

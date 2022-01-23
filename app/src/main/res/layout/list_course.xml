@@ -53,21 +53,8 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:minLines="2"
+            android:minLines="1"
             android:text="MOVIE_ACTORS"
-            android:textSize="14sp" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/movie_LBL_duration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/listCourse_TEXT_teacherName"
-            android:layout_alignStart="@id/listCourse_TEXT_courseName"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="00h 00m"
             android:textSize="14sp" />
 
 

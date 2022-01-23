@@ -3,10 +3,20 @@ package com.example.unigrades;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 public class CourseActivity extends AppCompatActivity {
+
+    private TextView textViewCourseName;
+    private TextView textViewAverageScores;
+    private StudentCourseFragment studentCourseFragment;
+    private TeacherCourseFragment teacherCourseFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +35,67 @@ public class CourseActivity extends AppCompatActivity {
             public void dataReady(Account value) {
                 myAccount.setAccountByAccount(value);
                 toolbar.setCurrentMode(myAccount.getType());
+                Bundle b = savedInstanceState.getBundle("bundle");
+                String cid = b.getString("cid");
+                Course course = new Course();
+                Course.Callback_Course callback_course = new Course.Callback_Course() {
+                    @Override
+                    public void dataReady(Course value) {
+                        textViewCourseName.setText("Course "+value.getName());
+                        double averageScores = calculateAverageGrade(value.getStudents());
+                        if(averageScores > 0){
+                            textViewAverageScores.
+                                    setText("Average scores on course: " + averageScores);
+                        }
+                        else{
+                            textViewAverageScores.
+                                    setText("No scores given yet.");
+                        }
+                        if(myAccount.getType().equals(Account.teacher)){
+                            //teacher
+                            teacherCourseFragment = TeacherCourseFragment.newInstance(cid);
+                            teacherCourseFragment.setActivity(CourseActivity.this);
+                            // TODO do i need this?:
+                            //  fragmentScores.setCallBackMap(callBackMap);
+                            getSupportFragmentManager().
+                                    beginTransaction().
+                                    add(R.id.course_FRAMELAYOUT_teacherOrStudent, teacherCourseFragment).
+                                    commit();
+
+                        }
+                        else if(myAccount.getType().equals(Account.student)){
+                            //student
+                            studentCourseFragment = StudentCourseFragment.newInstance(cid);
+                            studentCourseFragment.setActivity(CourseActivity.this);
+                            getSupportFragmentManager().
+                                    beginTransaction().
+                                    add(R.id.course_FRAMELAYOUT_teacherOrStudent, studentCourseFragment).
+                                    commit();
+                        }
+                        else{
+                            //shouldn't be able to get here.
+                        }
+                    }
+                };
+                course.findCourse(cid, callback_course);
             }
         };
         myAccount.findAccount(uid, callback_account);
     }
 
+    private double calculateAverageGrade(ArrayList<Student> students) {
+        double averageScores = -1;
+        for(Student student: students){
+            averageScores+=student.getGrade();
+        }
+        if (averageScores != -1){
+            averageScores = averageScores / students.size();
+        }
+        return averageScores;
+    }
+
     private void findViews() {
+        textViewCourseName = findViewById(R.id.course_TEXT_courseName);
+        textViewAverageScores = findViewById(R.id.course_TEXT_averageScore);
     }
 }
