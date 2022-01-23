@@ -20,8 +20,16 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     private EditText changePassword;
     private Button saveInfo;
 
-
-
+    /*
+    TODO WHAT NEEDS TO BE DONE:
+        course activity
+        sign in to course as a student
+        my courses activity
+        add comments as a student
+        add grades as a teacher
+        make everything prettier
+        optional: add more statistics
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
