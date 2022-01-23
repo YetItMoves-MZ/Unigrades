@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    android:elevation="8dp"
+    app:cardElevation="8dp"
+    android:layout_margin="10dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/movie_IMG_favorite"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/listCourse_TEXT_courseName"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:padding="6dp"
+            android:scaleType="fitCenter" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/listCourse_TEXT_courseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/movie_IMG_favorite"
+            android:ellipsize="end"
+            android:gravity="bottom"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="MOVIE_TITLE"
+            android:textSize="18sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/listCourse_TEXT_teacherName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listCourse_TEXT_courseName"
+            android:layout_alignStart="@id/listCourse_TEXT_courseName"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="MOVIE_ACTORS"
+            android:textSize="14sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/movie_LBL_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listCourse_TEXT_teacherName"
+            android:layout_alignStart="@id/listCourse_TEXT_courseName"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="00h 00m"
+            android:textSize="14sp" />
+
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

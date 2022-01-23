@@ -2,14 +2,30 @@ package com.example.unigrades;
 
 import android.os.Bundle;
 
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Course extends AccountCourse{
+
+    public interface Callback_Course{
+        void dataReady(Course value);
+    }
+
+
     private ArrayList<String> studentComments;
     private ArrayList<Student> students;
 
@@ -36,6 +52,23 @@ public class Course extends AccountCourse{
         return this;
     }
 
+    public void findCourse(String cid, Course.Callback_Course callback_course){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference myRef = db.collection("courses").document(cid);
+        myRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    Course course = documentSnapshot.toObject(Course.class);
+                    if(callback_course != null){
+                        callback_course.dataReady(course);
+                    }
+                }
+            }
+        });
+    }
+
+
     public void addCourseToDB(){
         String cid = this.getCid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -47,10 +80,6 @@ public class Course extends AccountCourse{
         course.put("studentComments", studentComments);
         DocumentReference myRef = db.collection("courses").document(cid);
         myRef.set(course);
-
-        //TODO need to continue this.
-
-
     }
 
 }

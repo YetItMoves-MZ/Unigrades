@@ -9,7 +9,53 @@
     <include
         android:id="@+id/include"
         layout="@layout/toolbar"
-        tools:layout_editor_absoluteX="-133dp"
-        tools:layout_editor_absoluteY="110dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <EditText
+        android:id="@+id/searchCourse_EDITTEXT_teacherName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="Teacher Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/searchCourse_EDITTEXT_courseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Course Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/searchCourse_EDITTEXT_teacherName"
+        app:layout_constraintStart_toStartOf="@+id/searchCourse_EDITTEXT_teacherName"
+        app:layout_constraintTop_toBottomOf="@+id/searchCourse_EDITTEXT_teacherName" />
+
+    <Button
+        android:id="@+id/searchCourse_BUTTON_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Search"
+        app:layout_constraintEnd_toEndOf="@+id/searchCourse_EDITTEXT_courseName"
+        app:layout_constraintStart_toStartOf="@+id/searchCourse_EDITTEXT_courseName"
+        app:layout_constraintTop_toBottomOf="@+id/searchCourse_EDITTEXT_courseName"
+        android:visibility="invisible"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchCourse_RECYCLERVIEW_courses"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintStart_toStartOf="@+id/include"
+        app:layout_constraintTop_toBottomOf="@+id/searchCourse_BUTTON_search" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
