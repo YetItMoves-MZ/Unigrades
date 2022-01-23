@@ -71,6 +71,8 @@ public class SearchCourseActivity extends AppCompatActivity {
                         //TODO change toast into switch activity to course activity with the cid.
                         Toast.makeText(SearchCourseActivity.this, "you clicked on: " +
                                 course.getName(), Toast.LENGTH_LONG).show();
+                        MyGlobalFunctions.startNewActivity(SearchCourseActivity.this, CourseActivity.class, course.getCid());
+
 
                     }
                 });
@@ -96,6 +98,17 @@ public class SearchCourseActivity extends AppCompatActivity {
                         }
                         adapter_course = new Adapter_Course(SearchCourseActivity.this, searchedCourses);
                         recyclerViewCourses.setAdapter(adapter_course);
+
+                        adapter_course.setCourseItemClickListener(new Adapter_Course.CourseItemClickListener() {
+                            @Override
+                            public void courseItemClicked(Course course, int position) {
+                                //TODO change toast into switch activity to course activity with the cid.
+                                Toast.makeText(SearchCourseActivity.this, "you clicked on: " +
+                                        course.getName(), Toast.LENGTH_LONG).show();
+                                MyGlobalFunctions.startNewActivity(SearchCourseActivity.this, CourseActivity.class, course.getCid());
+
+                            }
+                        });
 
                     }
                 });

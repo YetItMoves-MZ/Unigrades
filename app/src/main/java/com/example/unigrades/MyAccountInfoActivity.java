@@ -25,10 +25,11 @@ public class MyAccountInfoActivity extends AppCompatActivity {
         course activity
         sign in to course as a student
         my courses activity
+        change the back button in the toolbar to go to the right location and not exit app
         add comments as a student
         add grades as a teacher
         make everything prettier
-        optional: add more statistics
+        optional: add more statistics (like total average for student and number of academic credits)
     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

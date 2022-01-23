@@ -2,6 +2,7 @@ package com.example.unigrades;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,11 +21,19 @@ public class MyGlobalFunctions {
      */
     public static void startNewActivity(AppCompatActivity currentActivity,
                                         Class classType) {
-        Intent myIntent = new Intent(currentActivity, classType);
-        currentActivity.startActivity(myIntent);
-        currentActivity.finish();
+        startNewActivity(currentActivity,classType,"");
     }
 
 
-
+    public static void startNewActivity(AppCompatActivity currentActivity, Class classType, String cid) {
+        Intent myIntent = new Intent(currentActivity, classType);
+        currentActivity.startActivity(myIntent);
+        if(!cid.equals("")){
+            //add bundle
+            Bundle b = new Bundle();
+            b.putString("cid", cid);
+            myIntent.putExtra("bundle",cid);
+        }
+        currentActivity.finish();
+    }
 }
