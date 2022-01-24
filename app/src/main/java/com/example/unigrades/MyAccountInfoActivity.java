@@ -22,12 +22,10 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-        teacher course fragment - 24.1
-        sign in to course as a student (button in list_course) - 24.1
-        my courses activity - 24.1
-        change the back button in the toolbar to go to the right location and not exit app - 25.1
-        add comments as a student - 25.1
-        add grades as a teacher - 25.1
+        teacher course fragment - 25.1
+        sign in to course as a student (button added, just need to implement it) - 25.1
+        my courses activity (just copy paste it from search courses) - 25.1
+        change the back button in the toolbar to go to the right location and not exit app - 26.1
         make everything prettier - 26.1
         optional: add more statistics (like total average for student and number of academic credits)
     */
