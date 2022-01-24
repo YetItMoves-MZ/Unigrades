@@ -22,7 +22,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-        course fragments - 24.1
+        teacher course fragment - 24.1
         sign in to course as a student (button in list_course) - 24.1
         my courses activity - 24.1
         change the back button in the toolbar to go to the right location and not exit app - 25.1

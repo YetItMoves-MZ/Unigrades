@@ -35,7 +35,7 @@ public class CourseActivity extends AppCompatActivity {
             public void dataReady(Account value) {
                 myAccount.setAccountByAccount(value);
                 toolbar.setCurrentMode(myAccount.getType());
-                Bundle b = savedInstanceState.getBundle("bundle");
+                Bundle b = getIntent().getExtras().getBundle("bundle");
                 String cid = b.getString("cid");
                 Course course = new Course();
                 Course.Callback_Course callback_course = new Course.Callback_Course() {
@@ -85,8 +85,10 @@ public class CourseActivity extends AppCompatActivity {
 
     private double calculateAverageGrade(ArrayList<Student> students) {
         double averageScores = -1;
-        for(Student student: students){
-            averageScores+=student.getGrade();
+        if(students != null){
+            for(Student student: students){
+                averageScores+=student.getGrade();
+            }
         }
         if (averageScores != -1){
             averageScores = averageScores / students.size();

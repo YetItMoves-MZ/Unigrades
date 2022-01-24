@@ -27,13 +27,13 @@ public class MyGlobalFunctions {
 
     public static void startNewActivity(AppCompatActivity currentActivity, Class classType, String cid) {
         Intent myIntent = new Intent(currentActivity, classType);
-        currentActivity.startActivity(myIntent);
         if(!cid.equals("")){
             //add bundle
             Bundle b = new Bundle();
             b.putString("cid", cid);
-            myIntent.putExtra("bundle",cid);
+            myIntent.putExtra("bundle",b);
         }
+        currentActivity.startActivity(myIntent);
         currentActivity.finish();
     }
 }

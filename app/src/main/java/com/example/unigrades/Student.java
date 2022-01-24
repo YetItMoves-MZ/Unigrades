@@ -2,7 +2,7 @@ package com.example.unigrades;
 
 public class Student {
     private String name;
-    private int grade;
+    private int grade=-1;
     private String uid;
 
     public Student() {

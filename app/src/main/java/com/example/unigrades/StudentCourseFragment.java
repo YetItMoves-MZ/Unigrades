@@ -8,6 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +27,9 @@ public class StudentCourseFragment extends Fragment {
 
     private String cid;
     private AppCompatActivity activity;
+    private TextView grade;
+    private EditText comment;
+    private Button send;
 
     public void setActivity(AppCompatActivity activity){
         this.activity = activity;
@@ -50,12 +59,49 @@ public class StudentCourseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             cid = getArguments().getString(CID);
-            findViews();
             Course course = new Course();
             Course.Callback_Course callback_course = new Course.Callback_Course() {
                 @Override
                 public void dataReady(Course value) {
-                    //TODO add stuff to fragment
+                    Student me = null;
+                    if(value.getStudents() != null){
+                        for(Student student: value.getStudents()){
+                            if(student.getUid() == FirebaseAuth.getInstance().getUid()){
+                                me = student;
+                                break;
+                            }
+                        }
+                        if(me != null){
+                            // signed in
+                            if(me.getGrade() < 0){
+                                grade.setText("teacher did not update your grade yet");
+                            }
+                            else{
+                                grade.setText(me.getGrade());
+                            }
+                            send.setVisibility(View.VISIBLE);
+                            send.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    String inputComment = comment.getText().toString();
+                                    if (!inputComment.equals("")){
+                                        course.getStudentComments().add(inputComment);
+                                        comment.setText("");
+                                        Toast.makeText(activity,
+                                                "comment added",
+                                                Toast.LENGTH_SHORT);
+                                    }
+                                }
+                            });
+
+                        }
+                        else{
+                            grade.setText("not signed in yet");
+                        }
+                    }
+                    else{
+                        grade.setText("not signed in yet");
+                    }
                 }
             };
             course.findCourse(cid,callback_course);
@@ -63,13 +109,20 @@ public class StudentCourseFragment extends Fragment {
         }
     }
 
-    private void findViews() {
+    private void findViews(View view) {
+
+        grade = view.findViewById(R.id.courseStudentFragment_TEXT_grade);
+        comment = view.findViewById(R.id.courseStudentFragment_EDITTENXT_comments);
+        send = view.findViewById(R.id.courseStudentFragment_BUTTON_sendComments);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_course, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_student_course, container, false);
+        findViews(view);
+        return view;
     }
 }

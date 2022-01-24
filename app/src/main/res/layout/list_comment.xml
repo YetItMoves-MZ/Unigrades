@@ -12,14 +12,14 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/listCourse_BUTTON_signIn"
             android:layout_width="36dp"
-            android:layout_height="match_parent"
+            android:layout_height="36dp"
             android:layout_alignBottom="@id/listCourse_TEXT_courseName"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -27,8 +27,7 @@
             android:layout_marginEnd="8dp"
             android:padding="6dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_add_circle_outline_24"
-            android:visibility="invisible"/>
+            android:src="@drawable/ic_baseline_delete_24" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/listCourse_TEXT_courseName"
@@ -39,26 +38,10 @@
             android:layout_marginEnd="8dp"
             android:layout_toStartOf="@id/listCourse_BUTTON_signIn"
             android:ellipsize="end"
-            android:gravity="bottom"
-            android:maxLines="2"
+            android:maxLines="5"
             android:minLines="2"
-            android:text="COURSE_NAME"
+            android:text="COMMENT_CONTEXT"
             android:textSize="18sp" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/listCourse_TEXT_teacherName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/listCourse_TEXT_courseName"
-            android:layout_alignStart="@id/listCourse_TEXT_courseName"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:minLines="1"
-            android:text="TEACHER_NAME"
-            android:textSize="14sp" />
-
 
 
     </RelativeLayout>

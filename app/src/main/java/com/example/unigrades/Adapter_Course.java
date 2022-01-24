@@ -77,7 +77,7 @@ public class Adapter_Course extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public MaterialTextView teacherName;
         public CourseViewHolder(final View itemView){
             super(itemView);
-            this.addCourseButton = itemView.findViewById(R.id.listCourse_IMG_addCourse);
+            this.addCourseButton = itemView.findViewById(R.id.listCourse_BUTTON_signIn);
             this.courseName = itemView.findViewById(R.id.listCourse_TEXT_courseName);
             this.teacherName = itemView.findViewById(R.id.listCourse_TEXT_teacherName);
 
