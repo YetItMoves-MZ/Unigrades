@@ -5,8 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,10 +21,14 @@ public class Adapter_Course extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Activity activity;
     private ArrayList<Course> courses = new ArrayList<>();
     private CourseItemClickListener courseItemClickListener;
+    private boolean hasAddButton;
+    private String uid;
 
-    public Adapter_Course(Activity activity, ArrayList<Course> courses){
+    public Adapter_Course(Activity activity, ArrayList<Course> courses, String uid, boolean hasAddButton){
         this.activity = activity;
         this.courses = courses;
+        this.uid = uid;
+        this.hasAddButton = hasAddButton;
     }
 
     public Adapter_Course setCourseItemClickListener(CourseItemClickListener courseItemClickListener){
@@ -63,18 +67,17 @@ public class Adapter_Course extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface CourseItemClickListener {
-        void courseItemClicked(Course course, int position);
+        void courseItemClicked(Course course);
+        void signInClicked(Course course);
     }
 
     public class CourseViewHolder extends RecyclerView.ViewHolder{
-        public AppCompatImageView movie_IMG_favorite; //TODO check if really needed
+        public AppCompatImageView addCourseButton;
         public MaterialTextView courseName;
         public MaterialTextView teacherName;
-        public MaterialTextView movie_LBL_duration; //TODO check if really needed
         public CourseViewHolder(final View itemView){
             super(itemView);
-            this.movie_IMG_favorite = itemView.findViewById(R.id.movie_IMG_favorite);
-            this.movie_LBL_duration = itemView.findViewById(R.id.movie_LBL_duration);
+            this.addCourseButton = itemView.findViewById(R.id.listCourse_IMG_addCourse);
             this.courseName = itemView.findViewById(R.id.listCourse_TEXT_courseName);
             this.teacherName = itemView.findViewById(R.id.listCourse_TEXT_teacherName);
 
@@ -82,9 +85,41 @@ public class Adapter_Course extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View view) {
                     courseItemClickListener.
-                            courseItemClicked(getItem(getAdapterPosition()), getAdapterPosition());
+                            courseItemClicked(getItem(getAdapterPosition()));
                 }
             });
+            // check if add course is enabled
+            if(hasAddButton){
+                addCourseButton.setVisibility(View.VISIBLE);
+                addCourseButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Course currentCourse = getItem(getAdapterPosition());
+                        boolean flag = false;
+                        if(currentCourse.getStudents() != null){
+                            for (Student student: currentCourse.getStudents()){
+                                if(student.getUid().equals(uid)){
+                                    flag = true;
+                                }
+                            }
+                        }
+                        // check if student is not already signed in.
+                        if(!flag){
+                            courseItemClickListener.signInClicked(currentCourse);
+                        }
+                        else{
+                            //TODO check if i can make the sign in button disappear instead.
+                            Toast.makeText(activity,"student already signed in.",Toast.LENGTH_LONG);
+                        }
+                    }
+                });
+
+
+
+
+
+
+            }
 
         }
 

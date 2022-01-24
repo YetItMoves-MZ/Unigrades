@@ -51,7 +51,7 @@ public class SearchCourseActivity extends AppCompatActivity {
             @Override
             public void dataReady(ArrayList<Course> value) {
                 allCourses = value;
-                adapter_course = new Adapter_Course(SearchCourseActivity.this, allCourses);
+                adapter_course = new Adapter_Course(SearchCourseActivity.this, allCourses, uid, true);
 
                 //Grid
                 recyclerViewCourses.setLayoutManager(new GridLayoutManager(
@@ -67,13 +67,20 @@ public class SearchCourseActivity extends AppCompatActivity {
 
                 adapter_course.setCourseItemClickListener(new Adapter_Course.CourseItemClickListener() {
                     @Override
-                    public void courseItemClicked(Course course, int position) {
+                    public void courseItemClicked(Course course) {
                         //TODO change toast into switch activity to course activity with the cid.
                         Toast.makeText(SearchCourseActivity.this, "you clicked on: " +
                                 course.getName(), Toast.LENGTH_LONG).show();
                         MyGlobalFunctions.startNewActivity(SearchCourseActivity.this, CourseActivity.class, course.getCid());
 
 
+                    }
+
+                    @Override
+                    public void signInClicked(Course course) {
+                        //TODO add sign in clicked
+                        Toast.makeText(SearchCourseActivity.this, "you clicked on sign in in the course: " +
+                                course.getName(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -96,17 +103,24 @@ public class SearchCourseActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        adapter_course = new Adapter_Course(SearchCourseActivity.this, searchedCourses);
+                        adapter_course = new Adapter_Course(SearchCourseActivity.this, searchedCourses, uid, true);
                         recyclerViewCourses.setAdapter(adapter_course);
 
                         adapter_course.setCourseItemClickListener(new Adapter_Course.CourseItemClickListener() {
                             @Override
-                            public void courseItemClicked(Course course, int position) {
+                            public void courseItemClicked(Course course) {
                                 //TODO change toast into switch activity to course activity with the cid.
                                 Toast.makeText(SearchCourseActivity.this, "you clicked on: " +
                                         course.getName(), Toast.LENGTH_LONG).show();
                                 MyGlobalFunctions.startNewActivity(SearchCourseActivity.this, CourseActivity.class, course.getCid());
 
+                            }
+
+                            @Override
+                            public void signInClicked(Course course) {
+                                //TODO add sign in clicked
+                                Toast.makeText(SearchCourseActivity.this, "you clicked on sign in in the course: " +
+                                        course.getName(), Toast.LENGTH_LONG).show();
                             }
                         });
 
