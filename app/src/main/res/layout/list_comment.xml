@@ -17,10 +17,10 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/listCourse_BUTTON_signIn"
+            android:id="@+id/listComment_BUTTON_delete"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_alignBottom="@id/listCourse_TEXT_courseName"
+            android:layout_alignBottom="@id/listComment_TEXT_comment"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
@@ -30,13 +30,13 @@
             android:src="@drawable/ic_baseline_delete_24" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/listCourse_TEXT_courseName"
+            android:id="@+id/listComment_TEXT_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_toStartOf="@id/listCourse_BUTTON_signIn"
+            android:layout_toStartOf="@id/listComment_BUTTON_delete"
             android:ellipsize="end"
             android:maxLines="5"
             android:minLines="2"

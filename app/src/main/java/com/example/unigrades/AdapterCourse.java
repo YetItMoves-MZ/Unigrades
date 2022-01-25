@@ -17,21 +17,21 @@ import java.util.ArrayList;
 /**
  * used for recycle view
  */
-public class Adapter_Course extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterCourse extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Activity activity;
     private ArrayList<Course> courses = new ArrayList<>();
     private CourseItemClickListener courseItemClickListener;
     private boolean hasAddButton;
     private String uid;
 
-    public Adapter_Course(Activity activity, ArrayList<Course> courses, String uid, boolean hasAddButton){
+    public AdapterCourse(Activity activity, ArrayList<Course> courses, String uid, boolean hasAddButton){
         this.activity = activity;
         this.courses = courses;
         this.uid = uid;
         this.hasAddButton = hasAddButton;
     }
 
-    public Adapter_Course setCourseItemClickListener(CourseItemClickListener courseItemClickListener){
+    public AdapterCourse setCourseItemClickListener(CourseItemClickListener courseItemClickListener){
         this.courseItemClickListener = courseItemClickListener;
         return this;
     }
@@ -94,23 +94,7 @@ public class Adapter_Course extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 addCourseButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Course currentCourse = getItem(getAdapterPosition());
-                        boolean flag = false;
-                        if(currentCourse.getStudents() != null){
-                            for (Student student: currentCourse.getStudents()){
-                                if(student.getUid().equals(uid)){
-                                    flag = true;
-                                }
-                            }
-                        }
-                        // check if student is not already signed in.
-                        if(!flag){
-                            courseItemClickListener.signInClicked(currentCourse);
-                        }
-                        else{
-                            //TODO check if i can make the sign in button disappear instead.
-                            Toast.makeText(activity,"student already signed in.",Toast.LENGTH_LONG);
-                        }
+                        courseItemClickListener.signInClicked(getItem(getAdapterPosition()));
                     }
                 });
 

@@ -54,7 +54,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintEnd_toEndOf="@+id/include"
         app:layout_constraintStart_toStartOf="@+id/include"
-        app:layout_constraintTop_toBottomOf="@+id/searchCourse_BUTTON_search" />
+        app:layout_constraintTop_toBottomOf="@+id/searchCourse_BUTTON_search"
+        android:visibility="invisible"/>
 
 
 

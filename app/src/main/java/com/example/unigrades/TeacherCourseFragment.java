@@ -4,6 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +25,11 @@ public class TeacherCourseFragment extends Fragment {
 
     private String cid;
     private AppCompatActivity activity;
+    private RecyclerView recyclerViewStudents;
+    private RecyclerView recyclerViewComments;
+    private AdapterStudent adapterStudent;
+    private AdapterComment adapterComment;
+
 
     public void setActivity(AppCompatActivity activity){
         this.activity = activity;
@@ -50,27 +59,66 @@ public class TeacherCourseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             cid = getArguments().getString(CID);
-            findViews();
             Course course = new Course();
             Course.Callback_Course callback_course = new Course.Callback_Course() {
                 @Override
                 public void dataReady(Course value) {
-                    //TODO add stuff to fragment
+                    adapterComment = new AdapterComment(activity, course.getStudentComments(), course);
+
+                    //Grid
+                    //recyclerViewComments.setLayoutManager(new GridLayoutManager(
+                    //        activity, 1));
+
+                    // Vertically
+                     recyclerViewComments.setLayoutManager(new LinearLayoutManager(
+                     activity, LinearLayoutManager.VERTICAL, false));
+
+                    recyclerViewComments.setHasFixedSize(true);
+                    recyclerViewComments.setItemAnimator(new DefaultItemAnimator());
+                    recyclerViewComments.setAdapter(adapterComment);
+
+                    adapterComment.setCommentItemClickListener(new AdapterComment.CommentItemClickListener() {
+                        @Override
+                        public void deleteClicked(String comment) {
+                            //TODO wtf do i do with this...
+                        }
+                    });
+
+                    adapterStudent = new AdapterStudent(activity, course.getStudents(), course);
+
+                    recyclerViewStudents.setLayoutManager(
+                            new GridLayoutManager(activity, 1));
+                    recyclerViewStudents.setHasFixedSize(true);
+                    recyclerViewStudents.setItemAnimator(new DefaultItemAnimator());
+                    recyclerViewStudents.setAdapter(adapterStudent);
+
+                    adapterStudent.setStudentItemClickListener(new AdapterStudent.StudentItemClickListener() {
+                        @Override
+                        public void saveClicked(Course course) {
+                            //TODO wtf do i do with this...
+                        }
+                    });
+
+
+
                 }
             };
             course.findCourse(cid,callback_course);
-
-
         }
     }
 
-    private void findViews() {
+    private void findViews(View view) {
+        recyclerViewStudents = view.findViewById(R.id.courseTeacherFragment_RECYCLERVIEW_students);
+        recyclerViewComments = view.findViewById(R.id.courseTeacherFragment_RECYCLERVIEW_comments);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_teacher_course, container, false);
+        View view = inflater.inflate(R.layout.fragment_teacher_course, container, false);
+        findViews(view);
+        return view;
+
     }
 }

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,7 @@ public class SearchCourseActivity extends AppCompatActivity {
 
     private ArrayList<Course> allCourses;
     private ArrayList<Course> searchedCourses;
-    Adapter_Course adapter_course;
+    private AdapterCourse adapterCourse;
 
     public interface Callback_Courses{
         void dataReady(ArrayList<Course> value);
@@ -45,13 +46,27 @@ public class SearchCourseActivity extends AppCompatActivity {
 
         findViews();
 
+        // show info based on uid:
+        Account myAccount = new Account();
+        Account.Callback_Account callback_account = new Account.Callback_Account() {
+
+            @Override
+            public void dataReady(Account value) {
+                myAccount.setAccountByAccount(value);
+                toolbar.setCurrentMode(myAccount.getType());
+                recyclerViewCourses.setVisibility(View.VISIBLE);
+            }
+        };
+        myAccount.findAccount(uid, callback_account);
+
+
         // get all courses
 
         Callback_Courses callback_courses = new Callback_Courses() {
             @Override
             public void dataReady(ArrayList<Course> value) {
                 allCourses = value;
-                adapter_course = new Adapter_Course(SearchCourseActivity.this, allCourses, uid, true);
+                adapterCourse = new AdapterCourse(SearchCourseActivity.this, allCourses, uid, true);
 
                 //Grid
                 recyclerViewCourses.setLayoutManager(new GridLayoutManager(
@@ -63,9 +78,9 @@ public class SearchCourseActivity extends AppCompatActivity {
 
                 recyclerViewCourses.setHasFixedSize(true);
                 recyclerViewCourses.setItemAnimator(new DefaultItemAnimator());
-                recyclerViewCourses.setAdapter(adapter_course);
+                recyclerViewCourses.setAdapter(adapterCourse);
 
-                adapter_course.setCourseItemClickListener(new Adapter_Course.CourseItemClickListener() {
+                adapterCourse.setCourseItemClickListener(new AdapterCourse.CourseItemClickListener() {
                     @Override
                     public void courseItemClicked(Course course) {
                         //TODO change toast into switch activity to course activity with the cid.
@@ -78,9 +93,7 @@ public class SearchCourseActivity extends AppCompatActivity {
 
                     @Override
                     public void signInClicked(Course course) {
-                        //TODO add sign in clicked
-                        Toast.makeText(SearchCourseActivity.this, "you clicked on sign in in the course: " +
-                                course.getName(), Toast.LENGTH_LONG).show();
+                        signInToCourse(course, uid, myAccount);
                     }
                 });
 
@@ -103,10 +116,10 @@ public class SearchCourseActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        adapter_course = new Adapter_Course(SearchCourseActivity.this, searchedCourses, uid, true);
-                        recyclerViewCourses.setAdapter(adapter_course);
+                        adapterCourse = new AdapterCourse(SearchCourseActivity.this, searchedCourses, uid, true);
+                        recyclerViewCourses.setAdapter(adapterCourse);
 
-                        adapter_course.setCourseItemClickListener(new Adapter_Course.CourseItemClickListener() {
+                        adapterCourse.setCourseItemClickListener(new AdapterCourse.CourseItemClickListener() {
                             @Override
                             public void courseItemClicked(Course course) {
                                 //TODO change toast into switch activity to course activity with the cid.
@@ -118,9 +131,7 @@ public class SearchCourseActivity extends AppCompatActivity {
 
                             @Override
                             public void signInClicked(Course course) {
-                                //TODO add sign in clicked
-                                Toast.makeText(SearchCourseActivity.this, "you clicked on sign in in the course: " +
-                                        course.getName(), Toast.LENGTH_LONG).show();
+                                signInToCourse(course, uid, myAccount);
                             }
                         });
 
@@ -130,19 +141,52 @@ public class SearchCourseActivity extends AppCompatActivity {
         };
         findCourses(callback_courses);
 
-        // show info based on uid:
-        Account myAccount = new Account();
-        Account.Callback_Account callback_account = new Account.Callback_Account() {
 
-            @Override
-            public void dataReady(Account value) {
-                myAccount.setAccountByAccount(value);
-                toolbar.setCurrentMode(myAccount.getType());
+
+
+    }
+
+    private void signInToCourse(Course course, String uid, Account myAccount) {
+        boolean flag = false;
+        if(course.getStudents() != null){
+            for (Student student: course.getStudents()){
+                if(student.getUid().equals(uid)){
+                    flag = true;
+                }
             }
-        };
-        myAccount.findAccount(uid, callback_account);
+        }
+        // check if student is not already signed in.
+        if(!flag){
+            //add course to account
+            ArrayList<AccountCourse> courses = myAccount.getCourses();
+            if(courses == null){
+                courses = new ArrayList<AccountCourse>();
+            }
+            AccountCourse accountCourse = new AccountCourse(course);
+            courses.add(accountCourse);
+            myAccount.setCourses(courses);
+            myAccount.addAccountToDB(uid);
 
+            //add student to course
+            if(course.getStudents() == null){
+                course.setStudents(new ArrayList<Student>());
+            }
+            Student student = new Student();
+            student.setUid(uid).setName(myAccount.getFullName());
+            course.getStudents().add(student);
+            course.addCourseToDB();
 
+            //resets activity after getting the sign in so the gui will be updated accordingly
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        }
+        else{
+            //TODO check if i can make the sign in button disappear instead.
+            Toast.makeText(SearchCourseActivity.this,
+                    "student already signed in.",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     public void findCourses(Callback_Courses callback_courses){

@@ -23,7 +23,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     /*
     TODO WHAT NEEDS TO BE DONE:
         teacher course fragment - 25.1
-        sign in to course as a student (button added, just need to implement it) - 25.1
         my courses activity (just copy paste it from search courses) - 25.1
         change the back button in the toolbar to go to the right location and not exit app - 26.1
         make everything prettier - 26.1

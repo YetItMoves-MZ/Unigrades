@@ -41,8 +41,8 @@
             android:inputType="number"
             android:padding="6dp"
             android:scaleType="fitCenter"
-            android:textSize="15sp"
-            android:text="100"/>
+            android:text="100"
+            android:textSize="15sp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/listStudent_TEXT_studentName"

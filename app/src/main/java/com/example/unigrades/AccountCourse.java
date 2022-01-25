@@ -7,6 +7,11 @@ public class AccountCourse {
 
     public AccountCourse() {
     }
+    public AccountCourse(Course course){
+        this.name = course.getName();
+        this.cid = course.getCid();
+        this.teacherName = course.getTeacherName();
+    }
 
     public String getName() {
         return name;
