@@ -63,44 +63,42 @@ public class TeacherCourseFragment extends Fragment {
             Course.Callback_Course callback_course = new Course.Callback_Course() {
                 @Override
                 public void dataReady(Course value) {
-                    adapterComment = new AdapterComment(activity, course.getStudentComments(), course);
+                    if (value.getStudentComments() != null){
+                        adapterComment = new AdapterComment(activity, value.getStudentComments(), value);
 
-                    //Grid
-                    //recyclerViewComments.setLayoutManager(new GridLayoutManager(
-                    //        activity, 1));
+                        // Vertically
+                        recyclerViewComments.setLayoutManager(new LinearLayoutManager(
+                                activity, LinearLayoutManager.VERTICAL, false));
 
-                    // Vertically
-                     recyclerViewComments.setLayoutManager(new LinearLayoutManager(
-                     activity, LinearLayoutManager.VERTICAL, false));
+                        recyclerViewComments.setHasFixedSize(true);
+                        recyclerViewComments.setItemAnimator(new DefaultItemAnimator());
+                        recyclerViewComments.setAdapter(adapterComment);
 
-                    recyclerViewComments.setHasFixedSize(true);
-                    recyclerViewComments.setItemAnimator(new DefaultItemAnimator());
-                    recyclerViewComments.setAdapter(adapterComment);
+                        adapterComment.setCommentItemClickListener(new AdapterComment.CommentItemClickListener() {
+                            @Override
+                            public void deleteClicked(String comment) {
+                                //TODO wtf do i do with this...
+                            }
+                        });
+                    }
+                    if (value.getStudents() != null){
 
-                    adapterComment.setCommentItemClickListener(new AdapterComment.CommentItemClickListener() {
-                        @Override
-                        public void deleteClicked(String comment) {
-                            //TODO wtf do i do with this...
-                        }
-                    });
+                        adapterStudent = new AdapterStudent(activity, value.getStudents(), value);
 
-                    adapterStudent = new AdapterStudent(activity, course.getStudents(), course);
+                        // Grid
+                        recyclerViewStudents.setLayoutManager(
+                                new GridLayoutManager(activity, 1));
+                        recyclerViewStudents.setHasFixedSize(true);
+                        recyclerViewStudents.setItemAnimator(new DefaultItemAnimator());
+                        recyclerViewStudents.setAdapter(adapterStudent);
 
-                    recyclerViewStudents.setLayoutManager(
-                            new GridLayoutManager(activity, 1));
-                    recyclerViewStudents.setHasFixedSize(true);
-                    recyclerViewStudents.setItemAnimator(new DefaultItemAnimator());
-                    recyclerViewStudents.setAdapter(adapterStudent);
-
-                    adapterStudent.setStudentItemClickListener(new AdapterStudent.StudentItemClickListener() {
-                        @Override
-                        public void saveClicked(Course course) {
-                            //TODO wtf do i do with this...
-                        }
-                    });
-
-
-
+                        adapterStudent.setStudentItemClickListener(new AdapterStudent.StudentItemClickListener() {
+                            @Override
+                            public void saveClicked(Course course) {
+                                //TODO wtf do i do with this...
+                            }
+                        });
+                    }
                 }
             };
             course.findCourse(cid,callback_course);

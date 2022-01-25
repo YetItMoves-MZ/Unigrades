@@ -46,10 +46,10 @@ public class AdapterStudent extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Log.d("student_list", "position = " + position);
 
         studentViewHolder.studentName.setText(student.getName());
-        if(student.getGrade()>=0)
-            studentViewHolder.grade.setText(student.getGrade());
-
-
+        if(student.getGrade()>=0){
+            int grade = student.getGrade();
+            studentViewHolder.grade.setText(String.valueOf(grade));
+        }
 
     }
 
@@ -81,19 +81,20 @@ public class AdapterStudent extends RecyclerView.Adapter<RecyclerView.ViewHolder
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int gradeNumber = Integer.getInteger(grade.getText().toString());
+                    String gradeString = grade.getText().toString();
+                    int gradeNumber =Integer.parseInt(gradeString);
 
                     if(gradeNumber<0 || gradeNumber > 100){
                         Toast.makeText(activity,
                                 "grade must be between 0 - 100",
-                                Toast.LENGTH_LONG);
+                                Toast.LENGTH_LONG).show();
                     } else{
                         students.get(getAdapterPosition()).setGrade(gradeNumber);
                         currentCourse.setStudents(students);
                         currentCourse.addCourseToDB();
                         Toast.makeText(activity,
                                 "grade saved",
-                                Toast.LENGTH_SHORT);
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             });
