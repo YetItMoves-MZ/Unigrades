@@ -59,7 +59,7 @@ public class CreateCourseActivity extends AppCompatActivity {
                                 setTeacherName(myAccount.getFullName());
 
                         //add course to account database
-                        myAccount.getCourses().add(newAccountCourse);
+                        myAccount.getAccountCourses().add(newAccountCourse);
                         myAccount.addAccountToDB(uid);
 
                         //add course to course database

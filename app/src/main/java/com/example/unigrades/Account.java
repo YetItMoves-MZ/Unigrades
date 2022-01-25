@@ -1,10 +1,6 @@
 package com.example.unigrades;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,7 +22,7 @@ public class Account {
     public static final String teacher="Teacher";
 
     private String type;
-    private ArrayList<AccountCourse> courses;
+    private ArrayList<AccountCourse> accountCourses;
     private String fullName;
 
 
@@ -39,13 +35,24 @@ public class Account {
         this.type = type;
         return this;
     }
-    public ArrayList<AccountCourse> getCourses() {
-        return courses;
+    public ArrayList<AccountCourse> getAccountCourses() {
+        return accountCourses;
     }
-    public Account setCourses(ArrayList<AccountCourse> courses) {
-        this.courses = courses;
+    public Account setAccountCourses(ArrayList<AccountCourse> courses) {
+        this.accountCourses = courses;
         return this;
     }
+
+    public ArrayList<Course> getCourses(){
+        if(this.accountCourses == null)
+            return null;
+        ArrayList<Course> courses = new ArrayList<Course>();
+        for(AccountCourse course: this.accountCourses){
+            courses.add(new Course(course));
+        }
+        return courses;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -58,7 +65,7 @@ public class Account {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> acc = new HashMap<>();
         acc.put("type", this.type);
-        acc.put("courses", this.courses);
+        acc.put("accountCourses", this.accountCourses);
         acc.put("fullName", this.fullName);
         DocumentReference myRef = db.collection("users").document(uid);
         myRef.set(acc);
@@ -84,14 +91,14 @@ public class Account {
         type = other.getType();
         fullName = other.getFullName();
 
-        courses = other.getCourses();
-        if(courses == null){//no courses are up yet:
-            courses = new ArrayList<>();
+        accountCourses = other.getAccountCourses();
+        if(accountCourses == null){//no courses are up yet:
+            accountCourses = new ArrayList<>();
         }
     }
 
     public boolean hasCourse(String cid) {
-        for(AccountCourse course: courses){
+        for(AccountCourse course: accountCourses){
             if(course.getCid().equals(cid))
                 return true;
         }

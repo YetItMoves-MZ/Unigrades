@@ -72,10 +72,6 @@ public class SearchCourseActivity extends AppCompatActivity {
                 recyclerViewCourses.setLayoutManager(new GridLayoutManager(
                         SearchCourseActivity.this, 1));
 
-                // Vertically
-                // recyclerViewCourses.setLayoutManager(new LinearLayoutManager(
-                // SearchCourseActivity.this, LinearLayoutManager.VERTICAL, false));
-
                 recyclerViewCourses.setHasFixedSize(true);
                 recyclerViewCourses.setItemAnimator(new DefaultItemAnimator());
                 recyclerViewCourses.setAdapter(adapterCourse);
@@ -140,13 +136,10 @@ public class SearchCourseActivity extends AppCompatActivity {
             }
         };
         findCourses(callback_courses);
-
-
-
-
     }
 
     private void signInToCourse(Course course, String uid, Account myAccount) {
+        //TODO instead of flag, make a hasStudent function in Course class
         boolean flag = false;
         if(course.getStudents() != null){
             for (Student student: course.getStudents()){
@@ -158,13 +151,13 @@ public class SearchCourseActivity extends AppCompatActivity {
         // check if student is not already signed in.
         if(!flag){
             //add course to account
-            ArrayList<AccountCourse> courses = myAccount.getCourses();
+            ArrayList<AccountCourse> courses = myAccount.getAccountCourses();
             if(courses == null){
                 courses = new ArrayList<AccountCourse>();
             }
             AccountCourse accountCourse = new AccountCourse(course);
             courses.add(accountCourse);
-            myAccount.setCourses(courses);
+            myAccount.setAccountCourses(courses);
             myAccount.addAccountToDB(uid);
 
             //add student to course

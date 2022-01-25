@@ -13,8 +13,8 @@
             android:id="@+id/toolbar_IMG_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:src="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
@@ -22,8 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:layout_toEndOf="@id/toolbar_IMG_back"
             android:text="@string/app_name"
             android:textColor="@color/white"
@@ -35,8 +35,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:onClick="showPopUp"
             android:src="@drawable/ic_baseline_menu_24">
 
