@@ -23,7 +23,8 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-        make everything prettier - 26.1
+        make better error messages (red lines or stuff like that shown in lecture 8 i think...) - 27.1
+        make everything prettier - 27.1
         optional: add more statistics (like total average for student and number of academic credits)
     */
     @Override
