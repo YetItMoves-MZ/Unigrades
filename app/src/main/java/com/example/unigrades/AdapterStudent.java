@@ -64,7 +64,7 @@ public class AdapterStudent extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface StudentItemClickListener {
-        void saveClicked(Course course);
+        void saveClicked(int position, int grade);
     }
 
     public class StudentViewHolder extends RecyclerView.ViewHolder{
@@ -83,19 +83,7 @@ public class AdapterStudent extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onClick(View view) {
                     String gradeString = grade.getText().toString();
                     int gradeNumber =Integer.parseInt(gradeString);
-
-                    if(gradeNumber<0 || gradeNumber > 100){
-                        Toast.makeText(activity,
-                                "grade must be between 0 - 100",
-                                Toast.LENGTH_LONG).show();
-                    } else{
-                        students.get(getAdapterPosition()).setGrade(gradeNumber);
-                        currentCourse.setStudents(students);
-                        currentCourse.addCourseToDB();
-                        Toast.makeText(activity,
-                                "grade saved",
-                                Toast.LENGTH_SHORT).show();
-                    }
+                    studentItemClickListener.saveClicked(getAdapterPosition(), gradeNumber);
                 }
             });
 

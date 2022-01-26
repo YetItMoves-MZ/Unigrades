@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,8 +77,12 @@ public class TeacherCourseFragment extends Fragment {
 
                         adapterComment.setCommentItemClickListener(new AdapterComment.CommentItemClickListener() {
                             @Override
-                            public void deleteClicked(String comment) {
-                                //TODO wtf do i do with this...
+                            public void deleteClicked(int position) {
+                                value.getStudentComments().remove(position);
+                                value.addCourseToDB();
+
+                                activity.finish();
+                                activity.startActivity(activity.getIntent());
                             }
                         });
                     }
@@ -94,8 +99,19 @@ public class TeacherCourseFragment extends Fragment {
 
                         adapterStudent.setStudentItemClickListener(new AdapterStudent.StudentItemClickListener() {
                             @Override
-                            public void saveClicked(Course course) {
-                                //TODO wtf do i do with this...
+                            public void saveClicked(int position, int gradeNumber) {
+                                if(gradeNumber<0 || gradeNumber > 100){
+                                    Toast.makeText(activity,
+                                            "grade must be between 0 - 100",
+                                            Toast.LENGTH_LONG).show();
+                                } else{
+                                    value.getStudents().get(position).setGrade(gradeNumber);
+                                    value.addCourseToDB();
+                                    Toast.makeText(activity,
+                                            "grade saved",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                         });
                     }

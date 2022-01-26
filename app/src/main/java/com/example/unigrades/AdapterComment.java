@@ -63,7 +63,7 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface CommentItemClickListener {
-        void deleteClicked(String comment);
+        void deleteClicked(int position);
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder{
@@ -78,14 +78,7 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Course currentCourse = getCurrentCourse();
-                    currentCourse.getStudentComments().remove(getAdapterPosition());
-                    currentCourse.addCourseToDB(); //TODO check if it really deletes it that way in db.
-                    comments.remove(getAdapterPosition());
-
-                    //TODO ??? should refresh the activity but we will see if it works
-                    activity.finish();
-                    activity.startActivity(activity.getIntent());
+                    commentItemClickListener.deleteClicked(getAdapterPosition());
                 }
             });
 

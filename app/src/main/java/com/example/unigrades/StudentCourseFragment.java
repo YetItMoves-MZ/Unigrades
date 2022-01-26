@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StudentCourseFragment#newInstance} factory method to
@@ -64,9 +66,10 @@ public class StudentCourseFragment extends Fragment {
                 @Override
                 public void dataReady(Course value) {
                     Student me = null;
+                    String uid = FirebaseAuth.getInstance().getUid();
                     if(value.getStudents() != null){
                         for(Student student: value.getStudents()){
-                            if(student.getUid() == FirebaseAuth.getInstance().getUid()){
+                            if(student.getUid().equals(uid)){
                                 me = student;
                                 break;
                             }
@@ -77,7 +80,7 @@ public class StudentCourseFragment extends Fragment {
                                 grade.setText("teacher did not update your grade yet");
                             }
                             else{
-                                grade.setText(me.getGrade());
+                                grade.setText(String.valueOf(me.getGrade()));
                             }
                             send.setVisibility(View.VISIBLE);
                             send.setOnClickListener(new View.OnClickListener() {
@@ -85,11 +88,15 @@ public class StudentCourseFragment extends Fragment {
                                 public void onClick(View view) {
                                     String inputComment = comment.getText().toString();
                                     if (!inputComment.equals("")){
-                                        course.getStudentComments().add(inputComment);
+                                        if(value.getStudentComments() == null)
+                                            value.setStudentComments(new ArrayList<String>());
+
+                                        value.getStudentComments().add(inputComment);
+                                        value.addCourseToDB();
                                         comment.setText("");
                                         Toast.makeText(activity,
                                                 "comment added",
-                                                Toast.LENGTH_SHORT);
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

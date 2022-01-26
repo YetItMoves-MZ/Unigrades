@@ -20,9 +20,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     private EditText changePassword;
     private Button saveInfo;
 
-    /*
-    FIXME: known bug in course activity (student fragment) not showing grade - 26.1
-     */
 
     /*
     TODO WHAT NEEDS TO BE DONE:

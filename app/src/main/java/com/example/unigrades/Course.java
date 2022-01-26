@@ -77,7 +77,7 @@ public class Course extends AccountCourse{
         course.put("name", this.getName());
         course.put("teacherName", this.getTeacherName());
         course.put("students", this.students);
-        course.put("studentComments", studentComments);
+        course.put("studentComments", this.studentComments);
         DocumentReference myRef = db.collection("courses").document(cid);
         myRef.set(course);
     }

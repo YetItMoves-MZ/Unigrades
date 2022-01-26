@@ -91,7 +91,8 @@ public class CourseActivity extends AppCompatActivity {
             }
         }
         if (averageScores != -1){
-            averageScores = averageScores / students.size();
+            averageScores += 1;
+            averageScores /=  students.size();
         }
         return averageScores;
     }
