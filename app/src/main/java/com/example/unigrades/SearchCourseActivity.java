@@ -66,7 +66,9 @@ public class SearchCourseActivity extends AppCompatActivity {
             @Override
             public void dataReady(ArrayList<Course> value) {
                 allCourses = value;
-                adapterCourse = new AdapterCourse(SearchCourseActivity.this, allCourses, uid, true);
+                adapterCourse = new AdapterCourse(SearchCourseActivity.this,
+                        allCourses, uid,
+                        true);
 
                 //Grid
                 recyclerViewCourses.setLayoutManager(new GridLayoutManager(
@@ -79,12 +81,9 @@ public class SearchCourseActivity extends AppCompatActivity {
                 adapterCourse.setCourseItemClickListener(new AdapterCourse.CourseItemClickListener() {
                     @Override
                     public void courseItemClicked(Course course) {
-                        //TODO change toast into switch activity to course activity with the cid.
-                        Toast.makeText(SearchCourseActivity.this, "you clicked on: " +
-                                course.getName(), Toast.LENGTH_LONG).show();
-                        MyGlobalFunctions.startNewActivity(SearchCourseActivity.this, CourseActivity.class, course.getCid());
-
-
+                        MyGlobalFunctions.startNewActivity(SearchCourseActivity.this,
+                                CourseActivity.class,
+                                course.getCid());
                     }
 
                     @Override
@@ -118,10 +117,10 @@ public class SearchCourseActivity extends AppCompatActivity {
                         adapterCourse.setCourseItemClickListener(new AdapterCourse.CourseItemClickListener() {
                             @Override
                             public void courseItemClicked(Course course) {
-                                //TODO change toast into switch activity to course activity with the cid.
-                                Toast.makeText(SearchCourseActivity.this, "you clicked on: " +
-                                        course.getName(), Toast.LENGTH_LONG).show();
-                                MyGlobalFunctions.startNewActivity(SearchCourseActivity.this, CourseActivity.class, course.getCid());
+                                MyGlobalFunctions.
+                                        startNewActivity(SearchCourseActivity.this,
+                                        CourseActivity.class,
+                                        course.getCid());
 
                             }
 
@@ -139,17 +138,8 @@ public class SearchCourseActivity extends AppCompatActivity {
     }
 
     private void signInToCourse(Course course, String uid, Account myAccount) {
-        //TODO instead of flag, make a hasStudent function in Course class
-        boolean flag = false;
-        if(course.getStudents() != null){
-            for (Student student: course.getStudents()){
-                if(student.getUid().equals(uid)){
-                    flag = true;
-                }
-            }
-        }
         // check if student is not already signed in.
-        if(!flag){
+        if(course.hasStudent(uid)){
             //add course to account
             ArrayList<AccountCourse> courses = myAccount.getAccountCourses();
             if(courses == null){
@@ -188,7 +178,6 @@ public class SearchCourseActivity extends AppCompatActivity {
         myRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                //TODO check if it works on non existing collection
                 List<DocumentSnapshot> arr = queryDocumentSnapshots.getDocuments();
                 ArrayList<Course> courses = new ArrayList<>();
                 for(DocumentSnapshot documentSnapshot: arr){

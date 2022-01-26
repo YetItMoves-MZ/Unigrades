@@ -68,6 +68,15 @@ public class Course extends AccountCourse{
         });
     }
 
+    public boolean hasStudent(String uid){
+        if(this.getStudents() == null)
+            return false;
+        for(Student student: this.getStudents()){
+            if(student.getUid().equals(uid))
+                return true;
+        }
+        return false;
+    }
 
     public void addCourseToDB(){
         String cid = this.getCid();

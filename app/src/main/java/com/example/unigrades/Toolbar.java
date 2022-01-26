@@ -22,26 +22,29 @@ public class Toolbar{
     public Toolbar(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
         findViews();
-        //TODO check if "else" is needed here
-        if (MyAccountInfoActivity.class.equals(appCompatActivity.getClass())) {
-            backButton.setVisibility(View.INVISIBLE);
-        }
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (CourseActivity.class.equals(appCompatActivity.getClass())) {
+                    appCompatActivity.finish();
+                }
+                else if (CreateCourseActivity.class.equals(appCompatActivity.getClass()) ||
+                        MyCoursesActivity.class.equals(appCompatActivity.getClass()) ||
+                        SearchCourseActivity.class.equals(appCompatActivity.getClass())) {
+                    MyGlobalFunctions.
+                            startNewActivity(appCompatActivity, MyAccountInfoActivity.class);
+                }
+                else if (MyAccountInfoActivity.class.equals(appCompatActivity.getClass())) {
+                    MyGlobalFunctions.
+                            startNewActivity(appCompatActivity, SignInActivity.class);
+                }
+            }
+        });
+
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToolbarMenu(view);
-            }
-        });
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO check where "back button" needs to go in each and every activity.
-                if (MyAccountInfoActivity.class.equals(appCompatActivity.getClass())) {
-                    mode = " ";
-                }
-                else{
-                    appCompatActivity.finish();
-                }
             }
         });
     }

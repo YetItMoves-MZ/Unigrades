@@ -55,8 +55,6 @@ public class CourseActivity extends AppCompatActivity {
                             //teacher
                             teacherCourseFragment = TeacherCourseFragment.newInstance(cid);
                             teacherCourseFragment.setActivity(CourseActivity.this);
-                            // TODO do i need this?:
-                            //  fragmentScores.setCallBackMap(callBackMap);
                             getSupportFragmentManager().
                                     beginTransaction().
                                     add(R.id.course_FRAMELAYOUT_teacherOrStudent, teacherCourseFragment).

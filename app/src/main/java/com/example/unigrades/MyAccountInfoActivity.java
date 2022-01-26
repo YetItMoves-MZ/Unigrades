@@ -23,7 +23,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-        change the back button in the toolbar to go to the right location and not exit app - 26.1
         make everything prettier - 26.1
         optional: add more statistics (like total average for student and number of academic credits)
     */

@@ -34,6 +34,7 @@ public class MyGlobalFunctions {
             myIntent.putExtra("bundle",b);
         }
         currentActivity.startActivity(myIntent);
-        currentActivity.finish();
+        if(!classType.equals(CourseActivity.class))
+            currentActivity.finish();
     }
 }

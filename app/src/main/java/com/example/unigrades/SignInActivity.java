@@ -29,7 +29,7 @@ public class SignInActivity extends AppCompatActivity {
     private String password="";
 
 
-    //TODO need to test that.
+    //TODO not sure if i will use an automatic sign in.
     @Override
     public void onStart() {
         super.onStart();
