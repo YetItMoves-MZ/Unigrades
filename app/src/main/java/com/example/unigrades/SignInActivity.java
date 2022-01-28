@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,8 +23,11 @@ public class SignInActivity extends AppCompatActivity {
     private Button toSignUp;
     private Button signIn;
     private FirebaseAuth mAuth;
-    private EditText editTextEmail;
+    private TextInputLayout textLayoutEmail;
     private EditText editTextPassword;
+
+    private Validator emailValidator;
+
 
     private String email="";
     private String password="";
@@ -46,6 +50,10 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         findViews();
+
+        emailValidator = Validator.Builder.make(textLayoutEmail).
+                addWatcher(new Validator.WatcherEmail("Not Email")).
+                build();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -70,7 +78,7 @@ public class SignInActivity extends AppCompatActivity {
      * This function sign the user in with the given email and password.
      */
     private void signIn() {
-        email = editTextEmail.getText().toString();
+        email = textLayoutEmail.getEditText().getText().toString();
         password = editTextPassword.getText().toString();
         try {
             mAuth.signInWithEmailAndPassword(email, password)
@@ -106,7 +114,7 @@ public class SignInActivity extends AppCompatActivity {
     private void findViews() {
         toSignUp = findViewById(R.id.signIn_BUTTON_toSignUp);
         signIn = findViewById(R.id.signIn_BUTTON_signIn);
-        editTextEmail = findViewById(R.id.signIn_EDITTEXT_emailAddress);
+        textLayoutEmail = findViewById(R.id.signIn_EDITTEXT_emailAddress);
         editTextPassword = findViewById(R.id.signIn_EDITTEXT_password);
 
     }
