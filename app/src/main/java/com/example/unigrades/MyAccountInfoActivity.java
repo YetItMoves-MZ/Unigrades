@@ -25,7 +25,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     TODO WHAT NEEDS TO BE DONE:
              implemented validator but need to add more watchers and change all editText to TextInputLayout.
               see signInActivity email (both java and xml) for how it should look like.
-
+              delete course for teacher and exit course for student.
              make everything prettier - 27.1
         optional: add more statistics (like total average for student and number of academic credits)
     */

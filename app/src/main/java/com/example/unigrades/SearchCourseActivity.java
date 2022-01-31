@@ -139,7 +139,7 @@ public class SearchCourseActivity extends AppCompatActivity {
 
     private void signInToCourse(Course course, String uid, Account myAccount) {
         // check if student is not already signed in.
-        if(course.hasStudent(uid)){
+        if(!course.hasStudent(uid)){
             //add course to account
             ArrayList<AccountCourse> courses = myAccount.getAccountCourses();
             if(courses == null){

@@ -83,14 +83,20 @@ public class CourseActivity extends AppCompatActivity {
 
     private double calculateAverageGrade(ArrayList<Student> students) {
         double averageScores = -1;
+        int countGradelessStudents = 0;
         if(students != null){
             for(Student student: students){
-                averageScores+=student.getGrade();
+                if(student.getGrade()>=0){
+                    averageScores+=student.getGrade();
+                }
+                else{
+                    countGradelessStudents++;
+                }
             }
         }
         if (averageScores != -1){
-            averageScores += 1;
-            averageScores /=  students.size();
+            averageScores++;
+            averageScores /=  (students.size()-countGradelessStudents);
         }
         return averageScores;
     }
