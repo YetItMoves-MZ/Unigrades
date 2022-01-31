@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,15 +17,15 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
 
     private TextView textName;
-    private EditText changeName;
-    private EditText changePassword;
+    private TextInputLayout textLayoutChangeName;
+    private TextInputLayout textLayoutChangePassword;
     private Button saveInfo;
 
+    private Validator validatorName;
+    private Validator validatorPassword;
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-             implemented validator but need to add more watchers and change all editText to TextInputLayout.
-              see signInActivity email (both java and xml) for how it should look like.
               delete course for teacher and exit course for student.
              make everything prettier - 27.1
         optional: add more statistics (like total average for student and number of academic credits)
@@ -37,6 +38,16 @@ public class MyAccountInfoActivity extends AppCompatActivity {
         Toolbar toolbar = new Toolbar(this);
 
         findViews();
+
+        validatorName = Validator.Builder.make(textLayoutChangeName).
+                addWatcher(new Validator.WatcherStartWithUpperCase("Start with upper case")).
+                build();
+        validatorPassword = Validator.Builder.make(textLayoutChangePassword).
+                addWatcher(new Validator.WatcherAtLeastOneUpperCase("At least one upper case")).
+                addWatcher(new Validator.WatcherAtLeastOneLowerCase("At least one lower case")).
+                addWatcher(new Validator.WatcherAtLeastOneNumber("At least one number")).
+                addWatcher(new Validator.WatcherMinimumText("Password must contain at least 8 letters", 8)).
+                build();
 
         // show info based on uid:
         Account myAccount = new Account();
@@ -54,16 +65,33 @@ public class MyAccountInfoActivity extends AppCompatActivity {
         saveInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newName = changeName.getText().toString();
-                String newPassword = changePassword.getText().toString();
+                boolean passwordChanged = false;
+                boolean nameChanged = false;
+                String newName = textLayoutChangeName.getEditText().getText().toString();
+                String newPassword = textLayoutChangePassword.getEditText().getText().toString();
                 if(!newName.equals("")){
                     myAccount.setFullName(newName);
                     myAccount.addAccountToDB(uid);
                     textName.setText("Welcome, " + myAccount.getFullName());
+                    nameChanged = true;
                 }
                 if(!newPassword.equals("")){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     user.updatePassword(newPassword);
+                    passwordChanged = true;
+                }
+                String toastText = "";
+                if(passwordChanged)
+                    toastText = "password, ";
+                if(nameChanged)
+                    toastText += "name, ";
+                if(!toastText.equals("")){
+                    toastText = toastText.substring(0,toastText.length()-2);
+                    toastText += " changed.";
+                    Toast.makeText(MyAccountInfoActivity.this,
+                            toastText,
+                            Toast.LENGTH_LONG)
+                            .show();
                 }
             }
         });
@@ -72,8 +100,8 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     private void findViews() {
         textName = findViewById(R.id.myAccountInfo_TEXT_name);
-        changeName = findViewById(R.id.myAccountInfo_EDITTEXT_name);
-        changePassword = findViewById(R.id.myAccountInfo_EDITTEXT_Password);
+        textLayoutChangeName = findViewById(R.id.myAccountInfo_EDITTEXT_name);
+        textLayoutChangePassword = findViewById(R.id.myAccountInfo_EDITTEXT_Password);
         saveInfo = findViewById(R.id.myAccountInfo_BUTTON_save);
     }
 

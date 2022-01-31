@@ -5,18 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class CreateCourseActivity extends AppCompatActivity {
 
     private Button createButton;
-    private EditText editTextCourseName;
+    private TextInputLayout textLayoutCourseName;
 
     private Account myAccount;
     private String uid;
+
+    //TODO add validator
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class CreateCourseActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String courseName = editTextCourseName.getText().toString();
+                String courseName = textLayoutCourseName.getEditText().getText().toString();
                 if(!courseName.equals("")){
                     String cid = courseName + "_" + uid;
                     if(myAccount.hasCourse(cid)){
@@ -84,6 +86,6 @@ public class CreateCourseActivity extends AppCompatActivity {
 
     private void findViews() {
         createButton = findViewById(R.id.createCourse_BUTTON_createCourse);
-        editTextCourseName = findViewById(R.id.createCourse_EDITTEXT_courseName);
+        textLayoutCourseName = findViewById(R.id.createCourse_EDITTEXT_courseName);
     }
 }

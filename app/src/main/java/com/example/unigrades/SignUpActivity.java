@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,21 +24,19 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button toSignIn;
     private Button signUp;
-    private EditText editTextEmail;
-    private EditText editTextPassword;
+    private TextInputLayout textLayoutEmail;
+    private TextInputLayout textLayoutPassword;
     private Spinner teacherOrStudent;
-    private EditText editTextFullName;
+    private TextInputLayout textLayoutFullName;
 
     private String email="";
     private String password="";
     private String typeTeacherOrStudent="";
     private String fullName="";
 
-
-
-
-
-
+    private Validator emailValidator;
+    private Validator passwordValidator;
+    private Validator nameValidator;
 
 
     @Override
@@ -47,6 +45,19 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         findViews();
+
+        emailValidator = Validator.Builder.make(textLayoutEmail).
+                addWatcher(new Validator.WatcherEmail("Not email")).
+                build();
+        passwordValidator = Validator.Builder.make(textLayoutPassword).
+                addWatcher(new Validator.WatcherAtLeastOneUpperCase("At least one upper case")).
+                addWatcher(new Validator.WatcherAtLeastOneLowerCase("At least one lower case")).
+                addWatcher(new Validator.WatcherAtLeastOneNumber("At least one number")).
+                addWatcher(new Validator.WatcherMinimumText("Password must contain at least 8 letters", 8)).
+                build();
+        nameValidator = Validator.Builder.make(textLayoutFullName).
+                addWatcher(new Validator.WatcherStartWithUpperCase("Start with upper case")).
+                build();
 
         //create a list of items for the spinner.
         String[] itemsForSpinner = new String[]{"student", "teacher"};
@@ -88,18 +99,22 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUpNewUsers();
-
+                if(emailValidator.validateIt() &&
+                        nameValidator.validateIt() &&
+                        passwordValidator.validateIt() &&
+                        (!typeTeacherOrStudent.equals(""))){
+                    signUpNewUser();
+                }
             }
         });
 
     }
 
     //sign up new users
-    private void signUpNewUsers(){
-        email = editTextEmail.getText().toString();
-        password = editTextPassword.getText().toString();
-        fullName = editTextFullName.getText().toString();
+    private void signUpNewUser(){
+        email = textLayoutEmail.getEditText().getText().toString();
+        password = textLayoutPassword.getEditText().getText().toString();
+        fullName = textLayoutFullName.getEditText().getText().toString();
         try {
             //TODO guy had a class i didn't watched yet about how to do this properly. change this later to what he did.
             if(typeTeacherOrStudent == ""){
@@ -168,9 +183,9 @@ public class SignUpActivity extends AppCompatActivity {
     private void findViews() {
         toSignIn = findViewById(R.id.signUp_BUTTON_toSignIn);
         signUp = findViewById(R.id.signUp_BUTTON_signUp);
-        editTextEmail = findViewById(R.id.signUp_EDITTEXT_emailAddress);
-        editTextPassword = findViewById(R.id.signUp_EDITTEXT_password);
+        textLayoutEmail = findViewById(R.id.signUp_EDITTEXT_emailAddress);
+        textLayoutPassword = findViewById(R.id.signUp_EDITTEXT_password);
         teacherOrStudent = findViewById(R.id.signUp_SPINNER_teacherOrStudent);
-        editTextFullName = findViewById(R.id.signUp_EDITTEXT_name);
+        textLayoutFullName = findViewById(R.id.signUp_EDITTEXT_name);
     }
 }

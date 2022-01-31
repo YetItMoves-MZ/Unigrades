@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,10 +23,9 @@ public class SignInActivity extends AppCompatActivity {
     private Button signIn;
     private FirebaseAuth mAuth;
     private TextInputLayout textLayoutEmail;
-    private EditText editTextPassword;
+    private TextInputLayout textLayoutPassword;
 
     private Validator emailValidator;
-
 
     private String email="";
     private String password="";
@@ -51,9 +49,11 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         findViews();
 
+
         emailValidator = Validator.Builder.make(textLayoutEmail).
-                addWatcher(new Validator.WatcherEmail("Not Email")).
+                addWatcher(new Validator.WatcherEmail("Not email")).
                 build();
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -79,34 +79,36 @@ public class SignInActivity extends AppCompatActivity {
      */
     private void signIn() {
         email = textLayoutEmail.getEditText().getText().toString();
-        password = editTextPassword.getText().toString();
-        try {
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("fbtag", "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                updateUI(user);
-                            } else {
+        password = textLayoutPassword.getEditText().getText().toString();
+        if(emailValidator.validateIt()){
+            try {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d("fbtag", "signInWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                } else {
 
-                                // If sign in fails, display a message to the user.
-                                Log.w("fbtag", "signInWithEmail:failure",
-                                        task.getException());
-                                Toast.makeText(SignInActivity.this,
-                                        task.getException().getMessage(),
-                                        Toast.LENGTH_LONG).show();
+                                    // If sign in fails, display a message to the user.
+                                    Log.w("fbtag", "signInWithEmail:failure",
+                                            task.getException());
+                                    Toast.makeText(SignInActivity.this,
+                                            task.getException().getMessage(),
+                                            Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    });
-        } catch (Exception e) {
-            Log.w("fbtag", "signInWithEmail:failure",
-                    e);
-            Toast.makeText(SignInActivity.this,
-                    e.getMessage(),
-                    Toast.LENGTH_LONG).show();
+                        });
+            } catch (Exception e) {
+                Log.w("fbtag", "signInWithEmail:failure",
+                        e);
+                Toast.makeText(SignInActivity.this,
+                        e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -115,7 +117,7 @@ public class SignInActivity extends AppCompatActivity {
         toSignUp = findViewById(R.id.signIn_BUTTON_toSignUp);
         signIn = findViewById(R.id.signIn_BUTTON_signIn);
         textLayoutEmail = findViewById(R.id.signIn_EDITTEXT_emailAddress);
-        editTextPassword = findViewById(R.id.signIn_EDITTEXT_password);
+        textLayoutPassword = findViewById(R.id.signIn_EDITTEXT_password);
 
     }
 
@@ -125,7 +127,6 @@ public class SignInActivity extends AppCompatActivity {
      */
     private void updateUI(FirebaseUser user) {
         if (user!=null){
-            String uid = user.getUid();
             MyGlobalFunctions.startNewActivity(this, MyAccountInfoActivity.class);
         }
     }

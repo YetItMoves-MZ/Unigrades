@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -30,8 +31,10 @@ public class StudentCourseFragment extends Fragment {
     private String cid;
     private AppCompatActivity activity;
     private TextView grade;
-    private EditText comment;
+    private TextInputLayout comment;
     private Button send;
+
+    private Validator validatorComment;
 
     public void setActivity(AppCompatActivity activity){
         this.activity = activity;
@@ -60,6 +63,9 @@ public class StudentCourseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            validatorComment = Validator.Builder.make(comment).
+                    addWatcher(new Validator.WatcherMinimumText("comment cannot be empty", 1)).
+                    build();
             cid = getArguments().getString(CID);
             Course course = new Course();
             Course.Callback_Course callback_course = new Course.Callback_Course() {
@@ -86,14 +92,14 @@ public class StudentCourseFragment extends Fragment {
                             send.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    String inputComment = comment.getText().toString();
+                                    String inputComment = comment.getEditText().getText().toString();
                                     if (!inputComment.equals("")){
                                         if(value.getStudentComments() == null)
                                             value.setStudentComments(new ArrayList<String>());
 
                                         value.getStudentComments().add(inputComment);
                                         value.addCourseToDB();
-                                        comment.setText("");
+                                        comment.getEditText().setText("");
                                         Toast.makeText(activity,
                                                 "comment added",
                                                 Toast.LENGTH_SHORT).show();

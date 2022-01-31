@@ -82,8 +82,11 @@ public class AdapterStudent extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View view) {
                     String gradeString = grade.getText().toString();
-                    int gradeNumber =Integer.parseInt(gradeString);
-                    studentItemClickListener.saveClicked(getAdapterPosition(), gradeNumber);
+                    if(!gradeString.equals(""))
+                    {
+                        int gradeNumber =Integer.parseInt(gradeString);
+                        studentItemClickListener.saveClicked(getAdapterPosition(), gradeNumber);
+                    }
                 }
             });
 

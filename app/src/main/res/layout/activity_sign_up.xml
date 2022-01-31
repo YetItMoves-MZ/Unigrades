@@ -26,30 +26,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUp_SPINNER_teacherOrStudent" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_EDITTEXT_password"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_emailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_emailAddress"
+        app:errorEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_EDITTEXT_emailAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_TEXT_title" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_TEXT_title"
+        app:errorEnabled="true">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/signUp_TEXT_title"
@@ -83,16 +97,23 @@
         app:layout_constraintStart_toStartOf="@+id/signUp_EDITTEXT_name"
         app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_name" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_EDITTEXT_name"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Full Name"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/signUp_EDITTEXT_password"
         app:layout_constraintStart_toStartOf="@+id/signUp_EDITTEXT_password"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_password" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_password"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

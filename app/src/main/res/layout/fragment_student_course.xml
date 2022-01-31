@@ -22,18 +22,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/courseStudentFragment_EDITTENXT_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Write comments about the course so that your teacher will know what to improve"
+            android:hint="Write comments about the course"
             android:inputType="textMultiLine"
             app:layout_constraintBottom_toTopOf="@+id/courseStudentFragment_BUTTON_sendComments"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courseStudentFragment_TEXT_grade" />
+            app:layout_constraintTop_toBottomOf="@+id/courseStudentFragment_TEXT_grade"
+            app:errorEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/courseStudentFragment_BUTTON_sendComments"

@@ -123,5 +123,90 @@ public class Validator {
         }
     }
 
+    public static class WatcherMinimumText extends Watcher{
+        private int min;
+        public  WatcherMinimumText(String error, int min){
+            super(error);
+            this.min = min;
+        }
+
+        @Override
+        public boolean privateCheck(String input) {
+            String ePattern = "^*.{" + min + ",}$";
+            Pattern pat = Pattern.compile(ePattern);
+            if(!pat.matcher(input).matches()){
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public static class WatcherAtLeastOneNumber extends Watcher{
+        public WatcherAtLeastOneNumber(String error){
+            super(error);
+        }
+
+        @Override
+        public boolean privateCheck(String input) {
+            String ePattern = "^*(?=.*[0-9]).*$";
+            Pattern pat = Pattern.compile(ePattern);
+            if(!pat.matcher(input).matches()){
+                return false;
+            }
+            return true;
+        }
+
+
+    }
+
+    public static class WatcherAtLeastOneLowerCase extends Watcher{
+        public WatcherAtLeastOneLowerCase(String error){
+            super(error);
+        }
+
+        @Override
+        public boolean privateCheck(String input) {
+            String ePattern = "^*(?=.*[a-z]).*$";
+            Pattern pat = Pattern.compile(ePattern);
+            if(!pat.matcher(input).matches()){
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public static class WatcherAtLeastOneUpperCase extends Watcher{
+        public WatcherAtLeastOneUpperCase(String error){
+            super(error);
+        }
+
+        @Override
+        public boolean privateCheck(String input) {
+            String ePattern = "^*(?=.*[A-Z]).*$";
+            Pattern pat = Pattern.compile(ePattern);
+            if(!pat.matcher(input).matches()){
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public static class WatcherStartWithUpperCase extends Watcher{
+        public WatcherStartWithUpperCase(String error){
+            super(error);
+        }
+
+        @Override
+        public boolean privateCheck(String input) {
+            String ePattern = "^[A-Z].*$";
+            Pattern pat = Pattern.compile(ePattern);
+            if(!pat.matcher(input).matches()){
+                return false;
+            }
+            return true;
+        }
+    }
+
+
 }
 

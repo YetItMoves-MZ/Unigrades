@@ -41,7 +41,6 @@
             android:inputType="number"
             android:padding="6dp"
             android:scaleType="fitCenter"
-            android:text="100"
             android:textSize="15sp" />
 
         <com.google.android.material.textview.MaterialTextView
