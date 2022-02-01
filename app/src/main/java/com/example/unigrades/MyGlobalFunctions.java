@@ -1,5 +1,6 @@
 package com.example.unigrades;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -36,5 +37,15 @@ public class MyGlobalFunctions {
         currentActivity.startActivity(myIntent);
         if(!classType.equals(CourseActivity.class))
             currentActivity.finish();
+    }
+
+    /**
+     * reset activity
+     * @param activity current activity.
+     */
+    public static void refreshActivity(Activity activity) {
+        Intent intent = activity.getIntent();
+        activity.finish();
+        activity.startActivity(intent);
     }
 }

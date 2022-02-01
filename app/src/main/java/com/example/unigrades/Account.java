@@ -105,5 +105,17 @@ public class Account {
         return false;
     }
 
+    public void deleteCourseFromDB(String cid, String uid) {
+
+        for(AccountCourse course: this.getAccountCourses()){
+            if(course.getCid().equals(cid)){
+                this.getAccountCourses().remove(course);
+                this.addAccountToDB(uid);
+                return;
+            }
+        }
+    }
+
+
 
 }

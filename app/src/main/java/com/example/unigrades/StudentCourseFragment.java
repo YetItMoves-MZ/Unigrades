@@ -62,6 +62,12 @@ public class StudentCourseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         if (getArguments() != null) {
             validatorComment = Validator.Builder.make(comment).
                     addWatcher(new Validator.WatcherMinimumText("comment cannot be empty", 1)).

@@ -78,6 +78,20 @@ public class Course extends AccountCourse{
         return false;
     }
 
+    public boolean removeStudentFromDB(String uid) {
+        if(students != null){
+            for(Student student: students){
+                if(student.getUid().equals(uid)){
+                    students.remove(student);
+                    addCourseToDB();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     public void addCourseToDB(){
         String cid = this.getCid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -89,6 +103,25 @@ public class Course extends AccountCourse{
         course.put("studentComments", this.studentComments);
         DocumentReference myRef = db.collection("courses").document(cid);
         myRef.set(course);
+    }
+
+    public void deleteCourseFromDB(FirebaseFirestore db){
+        if(getStudents()!= null){
+            for(Student student: getStudents()){
+                String uid = student.getUid();
+                Account acc = new Account();
+                Account.Callback_Account callback_account= new Account.Callback_Account(){
+
+                    @Override
+                    public void dataReady(Account value) {
+                        acc.setAccountByAccount(value);
+                        acc.deleteCourseFromDB(getCid(),uid);
+                    }
+                };
+                acc.findAccount(uid, callback_account);
+            }
+        }
+        db.collection("courses").document(getCid()).delete();
     }
 
 }

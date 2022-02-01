@@ -26,8 +26,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-              delete course for teacher and exit course for student.
-             make everything prettier - 27.1
+             make everything prettier
         optional: add more statistics (like total average for student and number of academic credits)
     */
     @Override

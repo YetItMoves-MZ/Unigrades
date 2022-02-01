@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,14 +20,14 @@ public class AdapterCourse extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Activity activity;
     private ArrayList<Course> courses = new ArrayList<>();
     private CourseItemClickListener courseItemClickListener;
-    private boolean hasAddButton;
+    private boolean isAddButton;
     private String uid;
 
-    public AdapterCourse(Activity activity, ArrayList<Course> courses, String uid, boolean hasAddButton){
+    public AdapterCourse(Activity activity, ArrayList<Course> courses, String uid, boolean isAddButton){
         this.activity = activity;
         this.courses = courses;
         this.uid = uid;
-        this.hasAddButton = hasAddButton;
+        this.isAddButton = isAddButton;
     }
 
     public AdapterCourse setCourseItemClickListener(CourseItemClickListener courseItemClickListener){
@@ -68,18 +67,22 @@ public class AdapterCourse extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public interface CourseItemClickListener {
         void courseItemClicked(Course course);
-        void signInClicked(Course course);
+        void buttonClicked(Course course);
     }
 
     public class CourseViewHolder extends RecyclerView.ViewHolder{
-        public AppCompatImageView addCourseButton;
+        public AppCompatImageView button;
         public MaterialTextView courseName;
         public MaterialTextView teacherName;
         public CourseViewHolder(final View itemView){
             super(itemView);
-            this.addCourseButton = itemView.findViewById(R.id.listCourse_BUTTON_signIn);
+            this.button = itemView.findViewById(R.id.listCourse_BUTTON_button);
             this.courseName = itemView.findViewById(R.id.listCourse_TEXT_courseName);
             this.teacherName = itemView.findViewById(R.id.listCourse_TEXT_teacherName);
+
+            if(!isAddButton){
+                button.setImageDrawable(activity.getDrawable(R.drawable.ic_baseline_delete_24));
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,22 +91,13 @@ public class AdapterCourse extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                             courseItemClicked(getItem(getAdapterPosition()));
                 }
             });
-            // check if add course is enabled
-            if(hasAddButton){
-                addCourseButton.setVisibility(View.VISIBLE);
-                addCourseButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        courseItemClickListener.signInClicked(getItem(getAdapterPosition()));
-                    }
-                });
 
-
-
-
-
-
-            }
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    courseItemClickListener.buttonClicked(getItem(getAdapterPosition()));
+                }
+            });
 
         }
 

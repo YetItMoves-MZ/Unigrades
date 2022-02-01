@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -66,8 +67,27 @@ public class MyCoursesActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void signInClicked(Course course) {
-                        // only usable when needed to sign in for courses.
+                    public void buttonClicked(Course accountCourse) {
+                        String cid = accountCourse.getCid();
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        Course course = new Course();
+                        Course.Callback_Course callback_course = new Course.Callback_Course() {
+                            @Override
+                            public void dataReady(Course value) {
+                                if(myAccount.getType().equals(Account.teacher)){
+                                    //remove course from courses collection in database
+                                    value.deleteCourseFromDB(db);
+                                }
+                                if(myAccount.getType().equals(Account.student)){
+                                    //remove student from students arraylist in course in database
+                                    value.removeStudentFromDB(uid);
+                                }
+                                //remove course from account courses arraylist in database
+                                myAccount.deleteCourseFromDB(value.getCid(),uid);
+                                MyGlobalFunctions.refreshActivity(MyCoursesActivity.this);
+                            }
+                        };
+                        course.findCourse(cid, callback_course);
                     }
                 });
 

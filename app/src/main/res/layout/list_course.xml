@@ -17,7 +17,7 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/listCourse_BUTTON_signIn"
+            android:id="@+id/listCourse_BUTTON_button"
             android:layout_width="36dp"
             android:layout_height="match_parent"
             android:layout_alignBottom="@id/listCourse_TEXT_courseName"
@@ -27,8 +27,7 @@
             android:layout_marginEnd="8dp"
             android:padding="6dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_add_circle_outline_24"
-            android:visibility="invisible"/>
+            android:src="@drawable/ic_baseline_add_circle_outline_24" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/listCourse_TEXT_courseName"
@@ -37,7 +36,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_toStartOf="@id/listCourse_BUTTON_signIn"
+            android:layout_toStartOf="@id/listCourse_BUTTON_button"
             android:ellipsize="end"
             android:gravity="bottom"
             android:maxLines="2"

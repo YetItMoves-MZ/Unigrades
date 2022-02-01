@@ -87,7 +87,7 @@ public class SearchCourseActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void signInClicked(Course course) {
+                    public void buttonClicked(Course course) {
                         signInToCourse(course, uid, myAccount);
                     }
                 });
@@ -125,7 +125,7 @@ public class SearchCourseActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void signInClicked(Course course) {
+                            public void buttonClicked(Course course) {
                                 signInToCourse(course, uid, myAccount);
                             }
                         });
@@ -159,10 +159,7 @@ public class SearchCourseActivity extends AppCompatActivity {
             course.getStudents().add(student);
             course.addCourseToDB();
 
-            //resets activity after getting the sign in so the gui will be updated accordingly
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
+            MyGlobalFunctions.refreshActivity(this);
         }
         else{
             //TODO check if i can make the sign in button disappear instead.
