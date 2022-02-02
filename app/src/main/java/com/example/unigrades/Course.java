@@ -129,6 +129,7 @@ public class Course extends AccountCourse{
         course.put("cid", cid);
         course.put("name", this.getName());
         course.put("teacherName", this.getTeacherName());
+        course.put("academicCredits", this.getAcademicCredits());
         course.put("students", this.students);
         course.put("studentComments", this.studentComments);
         DocumentReference myRef = db.collection("courses").document(cid);

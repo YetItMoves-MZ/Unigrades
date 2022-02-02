@@ -4,6 +4,7 @@ public class AccountCourse {
     private String name;
     private String cid;
     private String teacherName;
+    private double academicCredits;
 
     public AccountCourse() {
     }
@@ -11,6 +12,7 @@ public class AccountCourse {
         this.name = course.getName();
         this.cid = course.getCid();
         this.teacherName = course.getTeacherName();
+        this.academicCredits = course.getAcademicCredits();
     }
 
     public String getName() {
@@ -32,6 +34,13 @@ public class AccountCourse {
     }
     public AccountCourse setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+        return this;
+    }
+    public double getAcademicCredits() {
+        return academicCredits;
+    }
+    public AccountCourse setAcademicCredits(double academicCredits) {
+        this.academicCredits = academicCredits;
         return this;
     }
 }
