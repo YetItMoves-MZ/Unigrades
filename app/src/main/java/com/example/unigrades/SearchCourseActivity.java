@@ -33,10 +33,6 @@ public class SearchCourseActivity extends AppCompatActivity {
     private ArrayList<Course> searchedCourses;
     private AdapterCourse adapterCourse;
 
-    public interface Callback_Courses{
-        void dataReady(ArrayList<Course> value);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +58,7 @@ public class SearchCourseActivity extends AppCompatActivity {
 
         // get all courses
 
-        Callback_Courses callback_courses = new Callback_Courses() {
+        Course.Callback_Courses callback_courses = new Course.Callback_Courses() {
             @Override
             public void dataReady(ArrayList<Course> value) {
                 allCourses = value;
@@ -134,7 +130,7 @@ public class SearchCourseActivity extends AppCompatActivity {
                 });
             }
         };
-        findCourses(callback_courses);
+        Course.findCourses(callback_courses);
     }
 
     private void signInToCourse(Course course, String uid, Account myAccount) {
@@ -162,30 +158,13 @@ public class SearchCourseActivity extends AppCompatActivity {
             MyGlobalFunctions.refreshActivity(this);
         }
         else{
-            //TODO check if i can make the sign in button disappear instead.
             Toast.makeText(SearchCourseActivity.this,
                     "student already signed in.",
                     Toast.LENGTH_LONG).show();
         }
     }
 
-    public void findCourses(Callback_Courses callback_courses){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference myRef = db.collection("courses");
-        myRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<DocumentSnapshot> arr = queryDocumentSnapshots.getDocuments();
-                ArrayList<Course> courses = new ArrayList<>();
-                for(DocumentSnapshot documentSnapshot: arr){
-                    courses.add(documentSnapshot.toObject(Course.class));
-                }
-                if(callback_courses != null){
-                    callback_courses.dataReady(courses);
-                }
-            }
-        });
-    }
+
 
     private void findViews() {
         editTextCourseName = findViewById(R.id.searchCourse_EDITTEXT_courseName);

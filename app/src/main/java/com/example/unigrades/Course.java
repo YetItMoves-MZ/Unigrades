@@ -25,6 +25,10 @@ public class Course extends AccountCourse{
         void dataReady(Course value);
     }
 
+    public interface Callback_Courses{
+        void dataReady(ArrayList<Course> value);
+    }
+
 
     private ArrayList<String> studentComments;
     private ArrayList<Student> students;
@@ -52,6 +56,14 @@ public class Course extends AccountCourse{
         return this;
     }
 
+    public Student getStudent(String uid){
+        for(Student student: students){
+            if(student.getUid().equals(uid))
+                return student;
+        }
+        return null;
+    }
+
     public void findCourse(String cid, Course.Callback_Course callback_course){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference myRef = db.collection("courses").document(cid);
@@ -63,6 +75,24 @@ public class Course extends AccountCourse{
                     if(callback_course != null){
                         callback_course.dataReady(course);
                     }
+                }
+            }
+        });
+    }
+
+    public static void findCourses(Callback_Courses callback_courses){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference myRef = db.collection("courses");
+        myRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<DocumentSnapshot> arr = queryDocumentSnapshots.getDocuments();
+                ArrayList<Course> courses = new ArrayList<>();
+                for(DocumentSnapshot documentSnapshot: arr){
+                    courses.add(documentSnapshot.toObject(Course.class));
+                }
+                if(callback_courses != null){
+                    callback_courses.dataReady(courses);
                 }
             }
         });
