@@ -69,7 +69,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
                         @Override
                         public void dataReady(double avg) {
                             if(avg>0){
-                                averageGrade.setText("Your average grade is " + String.valueOf(avg));
+                                averageGrade.setText("Your average grade is " + MyGlobalFunctions.df.format(avg));
 
                             }
                             else{

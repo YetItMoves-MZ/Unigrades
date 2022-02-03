@@ -8,12 +8,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 
 /**
  * This class is just a few functions that I would like to use globally to reduce code redundancy.
  */
 public class MyGlobalFunctions {
 
+
+    public static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * This function starts new activity and closing current activity.

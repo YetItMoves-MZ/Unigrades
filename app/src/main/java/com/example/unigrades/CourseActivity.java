@@ -47,7 +47,7 @@ public class CourseActivity extends AppCompatActivity {
                         double averageScores = calculateAverageGrade(value.getStudents());
                         if(averageScores > 0){
                             textViewAverageScores.
-                                    setText("Average scores on course: " + averageScores);
+                                    setText("Average scores on course: " + MyGlobalFunctions.df.format(averageScores));
                         }
                         else{
                             textViewAverageScores.
