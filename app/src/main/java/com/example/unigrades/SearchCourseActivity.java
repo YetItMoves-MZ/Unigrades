@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SearchCourseActivity extends AppCompatActivity {
 
@@ -92,8 +93,8 @@ public class SearchCourseActivity extends AppCompatActivity {
                 searchButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String teacherName = editTextTeacherName.getText().toString();
-                        String courseName = editTextCourseName.getText().toString();
+                        String teacherName = editTextTeacherName.getText().toString().toLowerCase();
+                        String courseName = editTextCourseName.getText().toString().toLowerCase();
                         searchedCourses = new ArrayList<Course>();
                         if (teacherName.equals("") && courseName.equals("")) {
                             searchedCourses = allCourses;
@@ -101,8 +102,8 @@ public class SearchCourseActivity extends AppCompatActivity {
                             for (Course course : allCourses) {
 
                                 // checks if the non empty searched value are contained in the course fields.
-                                if ((!courseName.equals("") && course.getName().contains(courseName)) ||
-                                        (!teacherName.equals("") && course.getTeacherName().contains(teacherName))) {
+                                if ((!courseName.equals("") && course.getName().toLowerCase().contains(courseName)) ||
+                                        (!teacherName.equals("") && course.getTeacherName().toLowerCase().contains(teacherName))) {
                                     searchedCourses.add(course);
                                 }
                             }
