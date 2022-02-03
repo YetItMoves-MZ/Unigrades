@@ -32,7 +32,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     /*
     TODO WHAT NEEDS TO BE DONE:
-        add number of academic credits calculator (will be shown in my account info).
         make everything prettier
     */
     @Override
@@ -65,10 +64,10 @@ public class MyAccountInfoActivity extends AppCompatActivity {
                 toolbar.setCurrentMode(myAccount.getType());
                 if(myAccount.getType().equals(Account.student)){
                     studentExtraInfo.setVisibility(View.VISIBLE);
-                    averageGrade.setText("no grades given yet aaa");
+                    academicCredits.setText("Total academic credits: " + myAccount.getAcademicGradeTotal());
                     myAccount.getAverageGrade(uid, new Account.Callback_AverageGrade() {
                         @Override
-                        public void dataReady(double avg) {//TODO still testing that.
+                        public void dataReady(double avg) {
                             if(avg>0){
                                 averageGrade.setText("Your average grade is " + String.valueOf(avg));
 
@@ -78,41 +77,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
                             }
                         }
                     });
-
-                    /*
-                    // naive version:
-                    Course.findCourses(new Course.Callback_Courses() {
-                        @Override
-                        public void dataReady(ArrayList<Course> courses) {
-                            double avg = 0;
-                            int numOfCourses = myAccount.getCourses().size();
-                            int flag = 0;
-                            outerLoop:
-                            for(Course course: courses){
-                                for(AccountCourse accountCourse: myAccount.getAccountCourses()){
-                                    if(accountCourse.getCid().equals(course.getCid())){
-                                        int grade = course.getStudent(uid).getGrade();
-                                        if(grade < 0){
-                                            // no grade was given
-                                            numOfCourses --;
-                                        }
-                                        else{
-                                            avg += grade;
-                                        }
-                                        flag ++;
-                                        if(flag == myAccount.getCourses().size()){
-                                            //found all courses.
-                                            break outerLoop;
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-
-                        }
-                    });
-
-                     */
                 }
             }
         };
@@ -125,17 +89,20 @@ public class MyAccountInfoActivity extends AppCompatActivity {
                 boolean nameChanged = false;
                 String newName = textLayoutChangeName.getEditText().getText().toString();
                 String newPassword = textLayoutChangePassword.getEditText().getText().toString();
-                if(!newName.equals("")){
+                if(validatorName.validateIt()){
+                    //name changed
                     myAccount.setFullName(newName);
                     myAccount.addAccountToDB(uid);
                     textName.setText("Welcome, " + myAccount.getFullName());
                     nameChanged = true;
                 }
-                if(!newPassword.equals("")){
+                if(validatorPassword.validateIt()){
+                    //password changed
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     user.updatePassword(newPassword);
                     passwordChanged = true;
                 }
+                //playing with strings
                 String toastText = "";
                 if(passwordChanged)
                     toastText = "password, ";

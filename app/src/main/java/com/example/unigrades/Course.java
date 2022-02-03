@@ -38,7 +38,8 @@ public class Course extends AccountCourse{
     public Course(AccountCourse newAccountCourse) {
         setCid(newAccountCourse.getCid()).
                 setName(newAccountCourse.getName()).
-                setTeacherName(newAccountCourse.getTeacherName());
+                setTeacherName(newAccountCourse.getTeacherName()).
+                setAcademicCredits(newAccountCourse.getAcademicCredits());
     }
 
     public ArrayList<String> getStudentComments() {

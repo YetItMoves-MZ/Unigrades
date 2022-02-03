@@ -116,19 +116,6 @@ public class SignUpActivity extends AppCompatActivity {
         password = textLayoutPassword.getEditText().getText().toString();
         fullName = textLayoutFullName.getEditText().getText().toString();
         try {
-            //TODO guy had a class i didn't watched yet about how to do this properly. change this later to what he did.
-            if(typeTeacherOrStudent == ""){
-                Toast.makeText(this,
-                       "Please insert if you are a teacher or student.",
-                        Toast.LENGTH_LONG).show();
-                return;
-            }
-            if(fullName == ""){
-                Toast.makeText(this,
-                        "Please insert full name.",
-                        Toast.LENGTH_LONG).show();
-                return;
-            }
             // sign up new users
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

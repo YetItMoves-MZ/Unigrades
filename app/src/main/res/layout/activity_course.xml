@@ -16,9 +16,7 @@
         android:id="@+id/course_FRAMELAYOUT_teacherOrStudent"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/course_TEXT_averageScore"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_TEXT_courseName">
@@ -37,13 +35,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/course_TEXT_academicCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_FRAMELAYOUT_teacherOrStudent" />
+
+    <TextView
         android:id="@+id/course_TEXT_averageScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/include"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/course_TEXT_academicCredits"
+        app:layout_constraintStart_toStartOf="@+id/course_TEXT_academicCredits"
+        app:layout_constraintTop_toBottomOf="@+id/course_TEXT_academicCredits" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

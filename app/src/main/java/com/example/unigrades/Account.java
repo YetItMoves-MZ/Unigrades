@@ -133,6 +133,16 @@ public class Account {
         }
     }
 
+    public double getAcademicGradeTotal(){
+        double total = 0;
+        if(accountCourses != null) {
+            for(AccountCourse course: accountCourses){
+                total += course.getAcademicCredits();
+            }
+        }
+        return total;
+    }
+
     public void setAccountByAccount(Account other) {
         type = other.getType();
         fullName = other.getFullName();

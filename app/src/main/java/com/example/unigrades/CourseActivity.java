@@ -15,6 +15,7 @@ public class CourseActivity extends AppCompatActivity {
 
     private TextView textViewCourseName;
     private TextView textViewAverageScores;
+    private TextView textViewAcademicCredits;
     private StudentCourseFragment studentCourseFragment;
     private TeacherCourseFragment teacherCourseFragment;
 
@@ -41,7 +42,8 @@ public class CourseActivity extends AppCompatActivity {
                 Course.Callback_Course callback_course = new Course.Callback_Course() {
                     @Override
                     public void dataReady(Course value) {
-                        textViewCourseName.setText("Course "+value.getName());
+                        textViewCourseName.setText("Course " + value.getName());
+                        textViewAcademicCredits.setText("Academic Credits: " + value.getAcademicCredits());
                         double averageScores = calculateAverageGrade(value.getStudents());
                         if(averageScores > 0){
                             textViewAverageScores.
@@ -104,5 +106,6 @@ public class CourseActivity extends AppCompatActivity {
     private void findViews() {
         textViewCourseName = findViewById(R.id.course_TEXT_courseName);
         textViewAverageScores = findViewById(R.id.course_TEXT_averageScore);
+        textViewAcademicCredits = findViewById(R.id.course_TEXT_academicCredits);
     }
 }

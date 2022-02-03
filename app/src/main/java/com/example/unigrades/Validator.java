@@ -207,6 +207,20 @@ public class Validator {
         }
     }
 
+    public static class WatcherIsANumber extends Watcher{
+        public WatcherIsANumber(String error){
+            super(error);
+        }
+        @Override
+        public boolean privateCheck(String input) {
+            String ePattern = "^\\d*\\.?\\d*$";
+            Pattern pat = Pattern.compile(ePattern);
+            if(!pat.matcher(input).matches()){
+                return false;
+            }
+            return true;        }
+    }
+
 
 }
 

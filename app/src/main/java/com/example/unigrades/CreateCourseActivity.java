@@ -32,10 +32,11 @@ public class CreateCourseActivity extends AppCompatActivity {
         findViews();
 
         validatorCourseName = Validator.Builder.make(textLayoutCourseName).
-                addWatcher(new Validator.WatcherStartWithUpperCase("must start with Upper case letter")).
+                addWatcher(new Validator.WatcherStartWithUpperCase("Must start with upper case letter")).
                 build();
 
         validatorAcademicCredits = Validator.Builder.make(textLayoutAcademicCredits).
+                addWatcher(new Validator.WatcherIsANumber("must be a decimal number")).
                 build();
 
         // show info based on uid:
@@ -57,7 +58,10 @@ public class CreateCourseActivity extends AppCompatActivity {
                 if(validatorCourseName.validateIt() &&
                         validatorAcademicCredits.validateIt()){
                     String courseName = textLayoutCourseName.getEditText().getText().toString();
-                    if(!courseName.equals("")){
+                    String academicCreditsStr = textLayoutAcademicCredits.getEditText().getText().toString();
+                    if((!courseName.equals("")) &&
+                            (!academicCreditsStr.equals(""))){
+                        double academicCredits = Double.parseDouble(academicCreditsStr);
                         String cid = courseName + "_" + uid;
                         if(myAccount.hasCourse(cid)){
                             Toast.makeText(CreateCourseActivity.this,
@@ -69,7 +73,8 @@ public class CreateCourseActivity extends AppCompatActivity {
                             AccountCourse newAccountCourse = new AccountCourse();
                             newAccountCourse.setCid(cid).
                                     setName(courseName).
-                                    setTeacherName(myAccount.getFullName());
+                                    setTeacherName(myAccount.getFullName()).
+                                    setAcademicCredits(academicCredits);
 
                             //add course to account database
                             myAccount.getAccountCourses().add(newAccountCourse);
@@ -87,7 +92,7 @@ public class CreateCourseActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(CreateCourseActivity.this,
-                                "name can't be empty.",
+                                "fields can't be empty.",
                                 Toast.LENGTH_LONG).show();
                     }
                 }
