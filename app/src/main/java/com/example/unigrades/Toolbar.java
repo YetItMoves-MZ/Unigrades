@@ -40,13 +40,17 @@ public class Toolbar{
                 }
             }
         });
-
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showToolbarMenu(view);
-            }
-        });
+        if (CourseActivity.class.equals(appCompatActivity.getClass())) {
+            menuButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            menuButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showToolbarMenu(view);
+                }
+            });
+        }
     }
 
     private void showToolbarMenu(View v) {
@@ -67,22 +71,19 @@ public class Toolbar{
                     case R.id.toolbarMenu_ITEM_toMyCoursesActivity:
                         MyGlobalFunctions.startNewActivity(appCompatActivity,
                                 MyCoursesActivity.class);
-                        break;
-                    case R.id.toolbarMenu_ITEM_toSearchCourse:
+                        return true;
+                        case R.id.toolbarMenu_ITEM_toSearchCourse:
                         MyGlobalFunctions.startNewActivity(appCompatActivity,
                                 SearchCourseActivity.class);
-                        break;
-                    case R.id.toolbarMenu_ITEM_toCreateCourse:
+                        return true;
+                        case R.id.toolbarMenu_ITEM_toCreateCourse:
                         MyGlobalFunctions.startNewActivity(appCompatActivity,
                                 CreateCourseActivity.class);
-                        break;
-                    default:
+                        return true;
+                        default:
                         return false;
                 }
-                if (CourseActivity.class.equals(appCompatActivity.getClass())) {
-                    appCompatActivity.finish();
-                }
-                return true;
+
             }
         });
     }
