@@ -67,18 +67,22 @@ public class Toolbar{
                     case R.id.toolbarMenu_ITEM_toMyCoursesActivity:
                         MyGlobalFunctions.startNewActivity(appCompatActivity,
                                 MyCoursesActivity.class);
-                        return true;
+                        break;
                     case R.id.toolbarMenu_ITEM_toSearchCourse:
                         MyGlobalFunctions.startNewActivity(appCompatActivity,
                                 SearchCourseActivity.class);
-                        return true;
+                        break;
                     case R.id.toolbarMenu_ITEM_toCreateCourse:
                         MyGlobalFunctions.startNewActivity(appCompatActivity,
                                 CreateCourseActivity.class);
-                        return true;
+                        break;
                     default:
                         return false;
                 }
+                if (CourseActivity.class.equals(appCompatActivity.getClass())) {
+                    appCompatActivity.finish();
+                }
+                return true;
             }
         });
     }
