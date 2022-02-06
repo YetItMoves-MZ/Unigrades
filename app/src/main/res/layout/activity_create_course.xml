@@ -9,8 +9,8 @@
     <include
         android:id="@+id/include"
         layout="@layout/toolbar"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="256dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/createCourse_BUTTON_createCourse"
@@ -21,7 +21,21 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/createCourse_EDITTEXT_academicCredits"
         app:layout_constraintStart_toStartOf="@+id/createCourse_EDITTEXT_academicCredits"
-        app:layout_constraintTop_toBottomOf="@+id/createCourse_EDITTEXT_academicCredits" />
+        app:layout_constraintTop_toBottomOf="@+id/createCourse_EDITTEXT_academicCredits"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="@color/ic_launcher_background"/>
+
+    <ImageView
+        android:id="@+id/createCourse_IMAGE_logo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="@+id/createCourse_BUTTON_createCourse"
+        app:layout_constraintStart_toStartOf="@+id/createCourse_BUTTON_createCourse"
+        app:layout_constraintTop_toBottomOf="@+id/createCourse_BUTTON_createCourse"
+        app:srcCompat="@drawable/logo" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/createCourse_EDITTEXT_courseName"

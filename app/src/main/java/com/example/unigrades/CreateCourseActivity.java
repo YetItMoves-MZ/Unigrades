@@ -32,11 +32,12 @@ public class CreateCourseActivity extends AppCompatActivity {
         findViews();
 
         validatorCourseName = Validator.Builder.make(textLayoutCourseName).
+                addWatcher(new Validator.WatcherMaximumText("Name cannot be longer than " + MyGlobalFunctions.MAXIMUM_NAME_SIZE, MyGlobalFunctions.MAXIMUM_NAME_SIZE)).
                 addWatcher(new Validator.WatcherStartWithUpperCase("Must start with upper case letter")).
                 build();
 
         validatorAcademicCredits = Validator.Builder.make(textLayoutAcademicCredits).
-                addWatcher(new Validator.WatcherIsANumber("must be a decimal number")).
+                addWatcher(new Validator.WatcherIsANumber("Must be a decimal number")).
                 build();
 
         // show info based on uid:
@@ -65,7 +66,7 @@ public class CreateCourseActivity extends AppCompatActivity {
                         String cid = courseName + "_" + uid;
                         if(myAccount.hasCourse(cid)){
                             Toast.makeText(CreateCourseActivity.this,
-                                    "course already exists.",
+                                    "Course already exists.",
                                     Toast.LENGTH_LONG).show();
                         }
                         else{
@@ -92,7 +93,7 @@ public class CreateCourseActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(CreateCourseActivity.this,
-                                "fields can't be empty.",
+                                "Fields can't be empty.",
                                 Toast.LENGTH_LONG).show();
                     }
                 }

@@ -8,69 +8,97 @@
 
     <TextView
         android:id="@+id/signIn_TEXT_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="70dp"
         android:layout_marginTop="16dp"
         android:text="Sign In:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/ic_launcher_background"
+        android:textStyle="bold"
+        android:fontFamily="@font/josefin_sans_bold"/>
 
     <Button
         android:id="@+id/signIn_BUTTON_signIn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/josefin_sans_semi_bold"
         android:text="Sign In"
+
+        app:cornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_password" />
+        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_password"
+        app:strokeColor="@color/ic_launcher_background" />
 
     <Button
         android:id="@+id/signIn_BUTTON_toSignUp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="64dp"
+        android:fontFamily="@font/josefin_sans_semi_bold"
         android:text="Sign Up"
+
+        app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_password" />
+        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_password"
+        app:strokeColor="@color/ic_launcher_background" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signIn_EDITTEXT_emailAddress"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:hint="email"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signIn_TEXT_title" >
+        app:layout_constraintTop_toBottomOf="@+id/signIn_TEXT_title">
+
         <com.google.android.material.textfield.TextInputEditText
-            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signIn_EDITTEXT_password"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
+        android:hint="password"
+        app:errorEnabled="true"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_emailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_emailAddress">
 
-        android:layout_width="200dp"
-        app:errorEnabled="true"
-        android:hint="password">
         <com.google.android.material.textfield.TextInputEditText
-            android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/signIn_IMAGE_logo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="@+id/signIn_BUTTON_toSignUp"
+        app:layout_constraintStart_toStartOf="@+id/signIn_BUTTON_signIn"
+        app:layout_constraintTop_toBottomOf="@+id/signIn_EDITTEXT_password"
+        app:srcCompat="@drawable/logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

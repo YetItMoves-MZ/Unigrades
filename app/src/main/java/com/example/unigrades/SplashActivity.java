@@ -13,7 +13,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getSimpleName();
 
-    final int ANIM_DURATION = 6000;
+    final int ANIM_DURATION = 3500;
 
     private ImageView imageLogo;
 

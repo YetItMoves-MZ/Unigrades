@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -27,12 +28,13 @@ public class StudentCourseFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String CID = "cid";
+    private static final int MAXIMUM_TEXT_SIZE = 100;
 
     private String cid;
     private AppCompatActivity activity;
     private TextView grade;
     private TextInputLayout comment;
-    private Button send;
+    private MaterialButton send;
 
     private Validator validatorComment;
 
@@ -70,7 +72,8 @@ public class StudentCourseFragment extends Fragment {
         super.onStart();
         if (getArguments() != null) {
             validatorComment = Validator.Builder.make(comment).
-                    addWatcher(new Validator.WatcherMinimumText("comment cannot be empty", 1)).
+                    addWatcher(new Validator.WatcherMaximumText("Text size cannot exceed " + MAXIMUM_TEXT_SIZE, MAXIMUM_TEXT_SIZE)).
+                    addWatcher(new Validator.WatcherMinimumText("Comment cannot be empty", 1)).
                     build();
             cid = getArguments().getString(CID);
             Course course = new Course();
@@ -94,6 +97,7 @@ public class StudentCourseFragment extends Fragment {
                             else{
                                 grade.setText(String.valueOf(me.getGrade()));
                             }
+                            comment.setVisibility(View.VISIBLE);
                             send.setVisibility(View.VISIBLE);
                             send.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -112,7 +116,6 @@ public class StudentCourseFragment extends Fragment {
                                     }
                                 }
                             });
-
                         }
                         else{
                             grade.setText("not signed in yet");
@@ -124,12 +127,10 @@ public class StudentCourseFragment extends Fragment {
                 }
             };
             course.findCourse(cid,callback_course);
-
         }
     }
 
     private void findViews(View view) {
-
         grade = view.findViewById(R.id.courseStudentFragment_TEXT_grade);
         comment = view.findViewById(R.id.courseStudentFragment_EDITTENXT_comments);
         send = view.findViewById(R.id.courseStudentFragment_BUTTON_sendComments);

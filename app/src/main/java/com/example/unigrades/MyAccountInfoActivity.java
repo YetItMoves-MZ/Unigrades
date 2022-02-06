@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,14 +27,11 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     private ConstraintLayout studentExtraInfo;
     private TextView averageGrade;
     private TextView academicCredits;
+    private ImageView teacherLogo;
 
     private Validator validatorName;
     private Validator validatorPassword;
 
-    /*
-    TODO WHAT NEEDS TO BE DONE:
-        make everything prettier
-    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +42,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
         findViews();
 
         validatorName = Validator.Builder.make(textLayoutChangeName).
+                addWatcher(new Validator.WatcherMaximumText("Name cannot be longer than " + MyGlobalFunctions.MAXIMUM_NAME_SIZE, MyGlobalFunctions.MAXIMUM_NAME_SIZE)).
                 addWatcher(new Validator.WatcherStartWithUpperCase("Start with upper case")).
                 build();
         validatorPassword = Validator.Builder.make(textLayoutChangePassword).
@@ -77,6 +76,9 @@ public class MyAccountInfoActivity extends AppCompatActivity {
                             }
                         }
                     });
+                }
+                else if(myAccount.getType().equals(Account.teacher)){
+                    teacherLogo.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -129,6 +131,7 @@ public class MyAccountInfoActivity extends AppCompatActivity {
         studentExtraInfo = findViewById(R.id.myAccountInfo_LAYOUT_studentInfo);
         averageGrade = findViewById(R.id.myAccountInfo_TEXT_averageGrade);
         academicCredits = findViewById(R.id.myAccountInfo_TEXT_academicCredits);
+        teacherLogo = findViewById(R.id.myAccountInfo_IMAGE_teacherLogo);
     }
 
 

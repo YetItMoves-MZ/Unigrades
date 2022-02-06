@@ -16,25 +16,33 @@
         android:id="@+id/searchCourse_EDITTEXT_teacherName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+
+        android:layout_marginTop="16dp"
+
         android:ems="10"
         android:hint="Teacher Name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
+        app:layout_constraintEnd_toEndOf="@+id/searchCourse_EDITTEXT_courseName"
+        app:layout_constraintStart_toStartOf="@+id/searchCourse_EDITTEXT_courseName"
+        app:layout_constraintTop_toBottomOf="@+id/searchCourse_EDITTEXT_courseName" />
 
     <EditText
         android:id="@+id/searchCourse_EDITTEXT_courseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+
+        android:layout_marginTop="80dp"
+
         android:ems="10"
         android:hint="Course Name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/searchCourse_EDITTEXT_teacherName"
-        app:layout_constraintStart_toStartOf="@+id/searchCourse_EDITTEXT_teacherName"
-        app:layout_constraintTop_toBottomOf="@+id/searchCourse_EDITTEXT_teacherName" />
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/searchCourse_BUTTON_search"
@@ -42,10 +50,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Search"
-        app:layout_constraintEnd_toEndOf="@+id/searchCourse_EDITTEXT_courseName"
-        app:layout_constraintStart_toStartOf="@+id/searchCourse_EDITTEXT_courseName"
-        app:layout_constraintTop_toBottomOf="@+id/searchCourse_EDITTEXT_courseName"
-        android:visibility="invisible"/>
+        app:layout_constraintEnd_toEndOf="@+id/searchCourse_EDITTEXT_teacherName"
+        app:layout_constraintStart_toStartOf="@+id/searchCourse_EDITTEXT_teacherName"
+        app:layout_constraintTop_toBottomOf="@+id/searchCourse_EDITTEXT_teacherName"
+        android:visibility="invisible"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="@color/ic_launcher_background"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchCourse_RECYCLERVIEW_courses"

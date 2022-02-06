@@ -56,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                 addWatcher(new Validator.WatcherMinimumText("Password must contain at least 8 letters", 8)).
                 build();
         nameValidator = Validator.Builder.make(textLayoutFullName).
+                addWatcher(new Validator.WatcherMaximumText("Name cannot be longer than " + MyGlobalFunctions.MAXIMUM_NAME_SIZE, MyGlobalFunctions.MAXIMUM_NAME_SIZE)).
                 addWatcher(new Validator.WatcherStartWithUpperCase("Start with upper case")).
                 build();
 

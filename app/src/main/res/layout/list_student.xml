@@ -41,7 +41,11 @@
             android:inputType="number"
             android:padding="6dp"
             android:scaleType="fitCenter"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+
+            android:gravity="center"
+            android:textColor="@color/ic_launcher_background"
+            android:fontFamily="@font/josefin_sans_regular"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/listStudent_TEXT_studentName"
@@ -52,11 +56,14 @@
             android:layout_marginEnd="8dp"
             android:layout_toStartOf="@id/listStudent_EDITTEXT_grade"
             android:ellipsize="end"
-            android:gravity="bottom"
             android:maxLines="1"
             android:minLines="1"
             android:text="STUDENT_NAME"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+
+            android:gravity="center"
+            android:textColor="@color/ic_launcher_background"
+            android:fontFamily="@font/josefin_sans_regular"/>
 
 
     </RelativeLayout>

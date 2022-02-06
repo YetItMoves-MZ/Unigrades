@@ -26,13 +26,19 @@
 
     <TextView
         android:id="@+id/course_TEXT_courseName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/ic_launcher_background"
+        android:textStyle="bold"
+        android:fontFamily="@font/josefin_sans_bold"/>
 
     <TextView
         android:id="@+id/course_TEXT_academicCredits"
@@ -42,7 +48,12 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_FRAMELAYOUT_teacherOrStudent" />
+        app:layout_constraintTop_toBottomOf="@+id/course_FRAMELAYOUT_teacherOrStudent"
+
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
 
     <TextView
         android:id="@+id/course_TEXT_averageScore"
@@ -52,6 +63,11 @@
         app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintEnd_toEndOf="@+id/course_TEXT_academicCredits"
         app:layout_constraintStart_toStartOf="@+id/course_TEXT_academicCredits"
-        app:layout_constraintTop_toBottomOf="@+id/course_TEXT_academicCredits" />
+        app:layout_constraintTop_toBottomOf="@+id/course_TEXT_academicCredits"
+
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

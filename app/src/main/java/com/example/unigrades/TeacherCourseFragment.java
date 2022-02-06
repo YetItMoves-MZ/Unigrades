@@ -81,8 +81,8 @@ public class TeacherCourseFragment extends Fragment {
                                 value.getStudentComments().remove(position);
                                 value.addCourseToDB();
 
-                                activity.finish();
-                                activity.startActivity(activity.getIntent());
+
+                                MyGlobalFunctions.refreshActivity(activity);
                             }
                         });
                     }
@@ -110,6 +110,7 @@ public class TeacherCourseFragment extends Fragment {
                                     Toast.makeText(activity,
                                             "grade saved",
                                             Toast.LENGTH_SHORT).show();
+                                    MyGlobalFunctions.refreshActivity(activity);
                                 }
 
                             }

@@ -17,6 +17,7 @@ public class MyGlobalFunctions {
 
 
     public static final DecimalFormat df = new DecimalFormat("0.00");
+    public static final int MAXIMUM_NAME_SIZE = 20;
 
     /**
      * This function starts new activity and closing current activity.

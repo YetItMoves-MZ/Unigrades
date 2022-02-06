@@ -14,7 +14,12 @@
         android:layout_marginTop="32dp"
         android:text="Sign Up"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_SPINNER_teacherOrStudent" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_SPINNER_teacherOrStudent"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
 
     <Button
         android:id="@+id/signUp_BUTTON_toSignIn"
@@ -24,7 +29,12 @@
         android:layout_marginEnd="64dp"
         android:text="Back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_SPINNER_teacherOrStudent" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_SPINNER_teacherOrStudent"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_EDITTEXT_password"
@@ -67,16 +77,21 @@
 
     <TextView
         android:id="@+id/signUp_TEXT_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="70dp"
         android:layout_marginTop="16dp"
         android:text="Sign Up:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
 
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/ic_launcher_background"
+        android:textStyle="bold"
+        android:fontFamily="@font/josefin_sans_bold"/>
     <Spinner
         android:id="@+id/signUp_SPINNER_teacherOrStudent"
         android:layout_width="wrap_content"
@@ -95,7 +110,12 @@
         android:text="teacher / student"
         app:layout_constraintEnd_toEndOf="@+id/signUp_EDITTEXT_name"
         app:layout_constraintStart_toStartOf="@+id/signUp_EDITTEXT_name"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_name" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_EDITTEXT_name"
+
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUp_EDITTEXT_name"

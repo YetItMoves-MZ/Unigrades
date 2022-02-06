@@ -141,6 +141,24 @@ public class Validator {
         }
     }
 
+    public static class WatcherMaximumText extends Watcher{
+        private int max;
+        public  WatcherMaximumText(String error, int max){
+            super(error);
+            this.max = max;
+        }
+
+        @Override
+        public boolean privateCheck(String input) {
+            String ePattern = "^*.{0," + max + "}$";
+            Pattern pat = Pattern.compile(ePattern);
+            if(!pat.matcher(input).matches()){
+                return false;
+            }
+            return true;
+        }
+    }
+
     public static class WatcherAtLeastOneNumber extends Watcher{
         public WatcherAtLeastOneNumber(String error){
             super(error);

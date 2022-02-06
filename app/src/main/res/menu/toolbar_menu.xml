@@ -6,16 +6,33 @@
         android:id="@+id/toolbarMenu_ITEM_toMyCoursesActivity"
         android:title="My Courses"
         android:icon="@drawable/ic_baseline_menu_24"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
+
     <item
         android:id="@+id/toolbarMenu_ITEM_toSearchCourse"
         android:title="Search Course"
         app:showAsAction="never"
-        android:visible="false"/>
+        android:visible="false"
+
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
+
     <item
         android:id="@+id/toolbarMenu_ITEM_toCreateCourse"
         android:title="Create Course"
         app:showAsAction="never"
-        android:visible="false">
-    </item>
+        android:visible="false"
+
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:textColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
+
 </menu>

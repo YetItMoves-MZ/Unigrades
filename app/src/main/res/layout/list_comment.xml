@@ -41,7 +41,11 @@
             android:maxLines="5"
             android:minLines="2"
             android:text="COMMENT_CONTEXT"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+
+            android:gravity="center"
+            android:textColor="@color/ic_launcher_background"
+            android:fontFamily="@font/josefin_sans_regular"/>
 
 
     </RelativeLayout>

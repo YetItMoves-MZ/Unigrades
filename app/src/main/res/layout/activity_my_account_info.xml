@@ -11,8 +11,8 @@
     <include
         android:id="@+id/include"
         layout="@layout/toolbar"
-        tools:layout_editor_absoluteX="-133dp"
-        tools:layout_editor_absoluteY="110dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/myAccountInfo_TEXT_name"
@@ -21,7 +21,12 @@
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include" />
+        app:layout_constraintTop_toTopOf="@+id/include"
+
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/ic_launcher_background"
+        android:fontFamily="@font/josefin_sans_semi_bold"/>
 
     <Button
         android:id="@+id/myAccountInfo_BUTTON_save"
@@ -31,24 +36,28 @@
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_EDITTEXT_Password" />
+        app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_EDITTEXT_Password"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="@color/ic_launcher_background"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/myAccountInfo_EDITTEXT_name"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="Change name"
         android:inputType="textPersonName"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_TEXT_name"
-        app:errorEnabled="true">
+        app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_TEXT_name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,33 +82,64 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/myAccountInfo_LAYOUT_studentInfo"
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="270dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_BUTTON_save"
-        android:visibility="invisible">
+        app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_BUTTON_save">
 
 
         <TextView
             android:id="@+id/myAccountInfo_TEXT_averageGrade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/josefin_sans_semi_bold"
+            android:gravity="center"
             android:text=""
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+            android:textColor="@color/ic_launcher_background"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/myAccountInfo_IMAGE_studentLogo"
+            app:layout_constraintStart_toStartOf="@+id/myAccountInfo_IMAGE_studentLogo"
+            app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_IMAGE_studentLogo" />
 
         <TextView
             android:id="@+id/myAccountInfo_TEXT_academicCredits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/josefin_sans_semi_bold"
+            android:gravity="center"
             android:text=""
+            android:textColor="@color/ic_launcher_background"
+
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/myAccountInfo_TEXT_averageGrade"
             app:layout_constraintStart_toStartOf="@+id/myAccountInfo_TEXT_averageGrade"
             app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_TEXT_averageGrade" />
+
+        <ImageView
+            android:id="@+id/myAccountInfo_IMAGE_studentLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <ImageView
+        android:id="@+id/myAccountInfo_IMAGE_teacherLogo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_BUTTON_save"
+        app:srcCompat="@drawable/logo" />
 
 
 
