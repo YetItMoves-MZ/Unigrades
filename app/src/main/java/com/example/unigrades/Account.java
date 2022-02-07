@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Account {
 
+
     public interface Callback_Account{
         void dataReady(Account value);
     }

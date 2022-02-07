@@ -21,7 +21,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
 
     private TextView textName;
-    private TextInputLayout textLayoutChangeName;
     private TextInputLayout textLayoutChangePassword;
     private Button saveInfo;
     private ConstraintLayout studentExtraInfo;
@@ -29,8 +28,19 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     private TextView academicCredits;
     private ImageView teacherLogo;
 
-    private Validator validatorName;
     private Validator validatorPassword;
+
+
+    /*TODO:
+        remove academic credits from account database.
+
+     */
+
+    /*fixme:
+        fix search to search by course name AND by teacher name.
+        fix that when giving grades, you cant insert dots.
+    */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +51,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
         findViews();
 
-        validatorName = Validator.Builder.make(textLayoutChangeName).
-                addWatcher(new Validator.WatcherMaximumText("Name cannot be longer than " + MyGlobalFunctions.MAXIMUM_NAME_SIZE, MyGlobalFunctions.MAXIMUM_NAME_SIZE)).
-                addWatcher(new Validator.WatcherStartWithUpperCase("Start with upper case")).
-                build();
         validatorPassword = Validator.Builder.make(textLayoutChangePassword).
                 addWatcher(new Validator.WatcherAtLeastOneUpperCase("At least one upper case")).
                 addWatcher(new Validator.WatcherAtLeastOneLowerCase("At least one lower case")).
@@ -69,7 +75,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
                         public void dataReady(double avg) {
                             if(avg>0){
                                 averageGrade.setText("Your average grade is " + MyGlobalFunctions.df.format(avg));
-
                             }
                             else{
                                 averageGrade.setText("no grades given yet");
@@ -87,34 +92,13 @@ public class MyAccountInfoActivity extends AppCompatActivity {
         saveInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean passwordChanged = false;
-                boolean nameChanged = false;
-                String newName = textLayoutChangeName.getEditText().getText().toString();
                 String newPassword = textLayoutChangePassword.getEditText().getText().toString();
-                if(validatorName.validateIt()){
-                    //name changed
-                    myAccount.setFullName(newName);
-                    myAccount.addAccountToDB(uid);
-                    textName.setText("Welcome, " + myAccount.getFullName());
-                    nameChanged = true;
-                }
                 if(validatorPassword.validateIt()){
                     //password changed
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     user.updatePassword(newPassword);
-                    passwordChanged = true;
-                }
-                //playing with strings
-                String toastText = "";
-                if(passwordChanged)
-                    toastText = "password, ";
-                if(nameChanged)
-                    toastText += "name, ";
-                if(!toastText.equals("")){
-                    toastText = toastText.substring(0,toastText.length()-2);
-                    toastText += " changed.";
                     Toast.makeText(MyAccountInfoActivity.this,
-                            toastText,
+                            "password changed.",
                             Toast.LENGTH_LONG)
                             .show();
                 }
@@ -125,7 +109,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
     private void findViews() {
         textName = findViewById(R.id.myAccountInfo_TEXT_name);
-        textLayoutChangeName = findViewById(R.id.myAccountInfo_EDITTEXT_name);
         textLayoutChangePassword = findViewById(R.id.myAccountInfo_EDITTEXT_Password);
         saveInfo = findViewById(R.id.myAccountInfo_BUTTON_save);
         studentExtraInfo = findViewById(R.id.myAccountInfo_LAYOUT_studentInfo);
