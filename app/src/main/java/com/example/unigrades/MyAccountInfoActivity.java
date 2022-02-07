@@ -37,7 +37,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
      */
 
     /*fixme:
-        fix search to search by course name AND by teacher name.
         fix that when giving grades, you cant insert dots.
     */
 

@@ -63,7 +63,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/myAccountInfo_LAYOUT_studentInfo"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="320dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myAccountInfo_BUTTON_save">
@@ -101,8 +101,8 @@
 
         <ImageView
             android:id="@+id/myAccountInfo_IMAGE_studentLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

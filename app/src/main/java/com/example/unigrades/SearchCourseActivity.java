@@ -100,10 +100,12 @@ public class SearchCourseActivity extends AppCompatActivity {
                             searchedCourses = allCourses;
                         } else {
                             for (Course course : allCourses) {
-
-                                // checks if the non empty searched value are contained in the course fields.
-                                if ((!courseName.equals("") && course.getName().toLowerCase().contains(courseName)) ||
-                                        (!teacherName.equals("") && course.getTeacherName().toLowerCase().contains(teacherName))) {
+                                if ((teacherName.equals("") &&
+                                        course.getName().toLowerCase().contains(courseName)) || // search by course only.
+                                        (courseName.equals("") &&
+                                                course.getTeacherName().toLowerCase().contains(teacherName)) || // search by teacher only.
+                                        (course.getName().toLowerCase().contains(courseName) &&
+                                                course.getTeacherName().toLowerCase().contains(teacherName))) { // search using both.
                                     searchedCourses.add(course);
                                 }
                             }
