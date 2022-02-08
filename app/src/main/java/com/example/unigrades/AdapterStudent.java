@@ -84,8 +84,15 @@ public class AdapterStudent extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     String gradeString = grade.getText().toString();
                     if(!gradeString.equals(""))
                     {
-                        int gradeNumber =Integer.parseInt(gradeString);
-                        studentItemClickListener.saveClicked(getAdapterPosition(), gradeNumber);
+
+                        try{
+                            int gradeNumber = Integer.parseInt(gradeString);
+                            studentItemClickListener.saveClicked(getAdapterPosition(), gradeNumber);
+                        }catch (NumberFormatException e){
+                            Toast.makeText(activity,
+                                    gradeString + " is not an integer.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             });

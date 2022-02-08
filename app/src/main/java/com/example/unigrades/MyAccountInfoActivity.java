@@ -36,10 +36,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
 
      */
 
-    /*fixme:
-        fix that when giving grades, you cant insert dots.
-    */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
