@@ -1,9 +1,5 @@
 package com.example.unigrades;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 public class Student {
     private String name;
     private int grade=-1;

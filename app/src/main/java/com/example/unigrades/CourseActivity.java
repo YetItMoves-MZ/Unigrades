@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class CourseActivity extends AppCompatActivity {

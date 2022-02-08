@@ -60,9 +60,6 @@ public class Validator {
     }
 
 
-
-
-
     public static class Builder {
         private TextInputLayout textInputLayout;
         private ArrayList<Watcher> watchers = new ArrayList<Watcher>();
@@ -238,7 +235,5 @@ public class Validator {
             }
             return true;        }
     }
-
-
 }
 

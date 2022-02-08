@@ -14,8 +14,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-
 
 public class MyAccountInfoActivity extends AppCompatActivity {
 
@@ -29,13 +27,6 @@ public class MyAccountInfoActivity extends AppCompatActivity {
     private ImageView teacherLogo;
 
     private Validator validatorPassword;
-
-
-    /*TODO:
-        remove academic credits from account database.
-
-     */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
